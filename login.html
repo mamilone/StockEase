@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login: Stock-Ease</title>
+    <link href="/login.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="D:\Stock-Ease\mamilone\logo.png" type="image">
+</head>
+<body>
+    <button onclick="home()">Home</button>
+    <div class="row">
+        <div class="col-md-6 mx-auto p-0">
+            <div class="card">
+                <div class="manager-box login-form">
+                    <form action="auth" method="POST">
+                      <div class="login-snip">
+                        <input id="tab-1" type="radio" name="tab" class="manager" checked><label for="tab-1" class="tab">Manager</label> 
+                        <input id="tab-2" type="radio" name="tab" class="Admin"><label for="tab-2" class="tab">Admin</label>
+                         <div class="user-login-space">
+                            <div class="user-login">
+                                <div class="group"> <label for="user" class="label">Username</label> 
+                                    <input id="user" type="text" name="username" class="input" placeholder="Enter your Username"></div>
+                                <div class="group"> <label for="pass" class="label">Password</label> 
+                                    <input id="pass" type="password" name="password" class="input" placeholder="Password"></div>
+                                <div class="group"> <input id="check" type="checkbox" class="check" checked> 
+                                    <label for="check"><span class="icon"></span> Keep me Signed in</label></div>
+                                <div class="group"> <input type="submit" class="button" value="Sign In"> </div>
+                                <div class="hr"></div>
+                            </div>
+                            <div class="admin-login">
+                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" name="username1" type="text" class="input" placeholder="Enter your Username"></div>
+                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" name="password1" type="password" class="input" data-type="password" placeholder="password"></div>
+                                <div class="group"> <input id="check" type="checkbox" class="check" checked> 
+                                    <label for="check"><span class="icon"></span> Keep me Signed in</label></div>
+                                <div class="group"> <input type="submit" class="button" value="Sign In"></div>
+                                <div class="hr"></div>
+                            </div>
+                        </div>
+                        <div class="foot2"> <a href="register.html">Don't have an Account? Register!</a></label></div>
+                     </div>
+                    </div>
+                    </form>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
