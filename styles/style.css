@@ -163,9 +163,12 @@ button:hover{
     width: 100%;
     position: relative;
     text-align: center;
+    /* margin: top 1000px; */
+    padding-top: 200px;
 }
 .contact h1{
     margin-top: 200px;
+    margin:30px auto;
     font-size: 60px;
     text-align: center;
     color: #000000;
@@ -199,6 +202,80 @@ button:hover{
     box-sizing: border-box;
     border-radius: 10px;
     border-color: rgb(0, 0, 0);
+}
+.contact p3{
+    width: 100%;
+    text-align: left;
+    margin-right: 1000px;
+    font-family: Garamond;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 200px;
+}
+.contact p4{
+    width: 100%;
+    text-align: left;
+    margin-right: 1000px;
+    font-family: Garamond;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 200px;
+    border: 2px solid #f1ef5f;
+    background: rgb(207, 226, 228);
+    box-sizing: border-box;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 0);
+}
+.contact p5{
+    width: 100%;
+    text-align: left;
+    margin-right: 1266px;
+    font-family: Garamond;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 200px;
+}
+.contact p6{
+    margin-right: 1200px;
+    
+}
+.contact p7{
+    margin-right: 1200px;
+}
+.contact p8{
+    margin-right: 685px;
+}
+.contact button{
+    margin-right: 200px;
+    width: 200px;
+    text-align: center;
+    border-radius: 25px;
+    background: transparent;
+    color: black;
+    border: 2px solid #000000;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 10px 0;
+}
+.contact span{
+    background: #db0d0d;
+    height: 100%;
+    width: 0%;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0;
+}
+.contac tbutton:hover span{
+    width: 100%;
+}
+.contact button:hover{
+    border: none;
 }
 
 .sub-content {

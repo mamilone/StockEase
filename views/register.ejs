@@ -19,6 +19,7 @@
                         <input id="tab-2" type="radio" name="tab" class="Admin"><label for="tab-2" class="tab">Admin</label>
                         <div class="user-login-space">
                             <div class="user-login">
+                                <div class="group"> <label for="user" class="label">Name</label> <input id="user" type="text" class="input" placeholder="Enter your Full Name"> </div>
                                 <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Create your Username"> </div>
                                 <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="text" class="input" placeholder="Enter your email address"> </div>
                                 <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password"> </div>
@@ -27,12 +28,16 @@
                                 <div class="hr"></div>
                             </div>
                             <div class="admin-login">
-                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Create your Username"> </div>
-                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="text" class="input" placeholder="Enter your email address"> </div>
-                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password"> </div>
-                                <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Repeat your password"> </div>
+                                <form action="cadmin" method="POST">
+                                <div class="group"> <label for="user" class="label">Name</label> <input id="user" type="text" class="input" name="Aname" placeholder="Enter your Full Name"> </div>
+                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" name="Ausername" placeholder="Create your Username"> </div>
+                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="text" class="input" 
+                                   name="Aemail" placeholder="Enter your email address"> </div>
+                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" name="Apassword" placeholder="Create your password"> </div>
+                                <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" name="Arpassword" placeholder="Repeat your password"> </div>
                                 <div class="group"> <button type="submit" class="button button1">Sign Up</button> </div>
                                 <div class="hr"></div>
+                                </form>
                             </div>
                         </div>
                     </div>

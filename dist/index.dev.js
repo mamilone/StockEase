@@ -25,7 +25,7 @@ var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: "MohammedAimon@41",
-  database: 'stock_ease'
+  database: 'stock-ease'
 });
 connection.connect(function (err) {
   if (err) throw err;
