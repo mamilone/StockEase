@@ -10,7 +10,7 @@
 <body>
     <header>
         <h3 id="btnNav">
-            Stock-Ease
+           STOCK EASE
         </h3>
     </header>
     <nav class="nav">
@@ -38,5 +38,55 @@
         </div>
         <div class="nav__overlay"></div>
     </nav>
+    <!-- from here------------------------------------------------- -->
+    <div class="productadmin">
+        <h1>PRODUCT INFORMATION</h1>
+        <!-- <div class="ptable"> -->
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+                
+               #producttable{
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+               } 
+               #producttable td, #producttable th{
+                border: 1px solid #ddd;
+                padding: 8px;
+                font-family: 'Libre Baskerville', serif;
+                font-size: 16px;
+               }
+               #producttable tr:nth-child(even){background-color: #ffffff;}
+               #producttable tr:hover {background-color: #ddd;}
+               #producttable th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #25644e;
+                color: white;
+               }
+            </style>
+            <table id="producttable">
+                <thead>
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Name</th>
+                        <th>Product Type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button class="remove"><span></span>REMOVE</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="add"><span></span>ADD PRODUCT</button>
+        <!-- </div> -->
+    </div>
+    <!-- til here____------------------------------------------------ -->
 </body>
 </html>

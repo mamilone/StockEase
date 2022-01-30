@@ -17,7 +17,7 @@ var expressValidator = require('express-validator');
 require('dotenv').config();
 
 var app = express();
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5000;
 
 //connecting mysql database
 var connection = mysql.createConnection({
@@ -25,7 +25,7 @@ var connection = mysql.createConnection({
     user    : 'root',
     password: "",
     database: 'stock-ease',
-    port:4000
+    port:3306
 });
 
 

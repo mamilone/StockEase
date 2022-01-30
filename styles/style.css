@@ -271,7 +271,7 @@ button:hover{
     z-index: -1;
     transition: 0;
 }
-.contac tbutton:hover span{
+.contact button:hover span{
     width: 100%;
 }
 .contact button:hover{
