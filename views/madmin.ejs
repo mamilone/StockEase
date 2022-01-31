@@ -10,7 +10,7 @@
 <body>
     <header>
         <h3 id="btnNav">
-            Stock-Ease
+            STOCK EASE
         </h3>
     </header>
     <nav class="nav">
@@ -38,5 +38,60 @@
         </div>
         <div class="nav__overlay"></div>
     </nav>
+    <!-- changes ive made--------------------------- -->
+    <div class="manageradmin">
+        <h1>MANAGER INFORMATION</h1>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+            #mtable{
+             font-family: Arial, Helvetica, sans-serif;
+             border-collapse: collapse;
+             width: 100%;
+            } 
+            #mtable td, #mtable th{
+             border: 1px solid #ddd;
+             padding: 8px;
+             font-family: 'Libre Baskerville', serif;
+             font-size: 16px;
+            }
+            #mtable tr:nth-child(even){background-color: #ffffff;}
+            #mtable tr:hover {background-color: #ddd;}
+            #mtable th {
+             padding-top: 12px;
+             padding-bottom: 12px;
+             text-align: left;
+             background-color: #25644e;
+             color: white;
+            }
+        </style>
+        <table id="mtable">
+            <thead>
+                <tr>
+                    <th>Manager Id</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(rlength > 0) { %>
+                    <% result.forEach((result, index) => { %>
+                    <tr>
+                        <td><%= result.id %></td>
+                        <td><%= result.name %></td>
+                        <td><%= result.username %></td>
+                        <td><%= result.email_id %></td>
+                        <td><button class="remove"><span></span>REMOVE</button></td>
+                    </tr>
+                    <% }) %>
+                    <%} else {%>
+                        <td>No Managers present</td>
+                    <% } %>
+            </tbody>
+        </table>
+        <button class="add"><span></span>ADD MANAGER</button>
+    </div>
+    <!-- till here============================================== -->
 </body>
 </html>

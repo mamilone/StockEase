@@ -18,6 +18,9 @@
                          <div class="user-login-space">
                             <div class="user-login">
                                 <form action="authman" method="POST">
+                                    <% if (loginMSG != '') { %>
+                                        <p class="text-center text-danger"><%= loginMSG %></p>
+                                    <% } %>
                                 <div class="group"> <label for="user" class="label">Username</label> 
                                     <input id="user" type="text" name="username" class="input" placeholder="Enter your Username"></div>
                                 <div class="group"> <label for="pass" class="label">Password</label> 
@@ -30,6 +33,9 @@
                             </div>
                             <div class="admin-login">
                                 <form action="authadm" method="POST">
+                                    <% if (loginMSG != '') { %>
+                                        <p class="text-center text-danger"><%= loginMSG %></p>
+                                    <% } %>
                                 <div class="group"> <label for="user" class="label">Username</label> <input id="user" name="username1" type="text" class="input" placeholder="Enter your Username"></div>
                                 <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" name="password1" type="password" class="input" data-type="password" placeholder="password"></div>
                                 <div class="group"> <input id="check" type="checkbox" class="check" checked> 

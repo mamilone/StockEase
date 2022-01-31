@@ -5,19 +5,21 @@ const exphbs = require('express-handlebars');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
-//const  response  = require('express');
-//const { request } = require('http');
 var CreateError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var flash = require('express-flash');
 var expressValidator = require('express-validator');
-
+const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage}=require('./routes/login');
+const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail } = require('./routes/register');
+const { getAdminDetails, getManagerDetails, getProductDetails, getSuggestion } = require('./routes/admind');
+const { getManagerD } = require('./routes/mdetails');
 require('dotenv').config();
+const database_name = 'stock-ease';
 
 var app = express();
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5000;
 
 //connecting mysql database
 var connection = mysql.createConnection({
@@ -32,12 +34,14 @@ var connection = mysql.createConnection({
 
 connection.connect((err)=>{
     if(err) throw err;
-    console.log("connected")
-
+    console.log(`connected to ${database_name} Database`)
 });
+global.connection = connection;
 
-//setting up ejs
-app.set("view-engine","ejs");
+
+//setting 
+app.set('port', port);
+app.set('views',__dirname + "/views");
 //using some of Express packages
 app.use(session({
     secret: 'secret',
@@ -48,15 +52,11 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
-app.use(cookieParser());
-
-
-app.use(express.static('views'));
 app.use(express.static('styles'));
 app.use(express.static('assets'));
 app.use(express.static('routes'));
 
-app.set('views', './views')
+app.set('views','./views')
 app.set('view engine', 'ejs')
 
 app.use(flash());
@@ -71,96 +71,27 @@ app.get('/home', (req, res)=> {
     res.render('home');
 })
 
-app.get('/login', (req, res)=> {
-    res.render('login');
-});
-app.get('/register', (req, res)=> {
-    res.render('register');
-});
+app.get('/login', getLoginPage);
+app.get('/mainadmin', getAdminDetails);
+app.get('/sadmin', getSuggestion);
+app.get('/padmin', getProductDetails);
+app.get('/madmin', getManagerDetails);
 
-app.get('/mainadmin', (req, res)=> {
-    res.render('mainadmin');
-});
-
-app.get('/sadmin', (req, res)=> {
-    res.render('sadmin');
-});
-
-app.get('/padmin', (req, res)=> {
-    res.render('padmin');
-});
-
-app.get('/madmin', (req, res)=> {
-    res.render('madmin');
-});
-
-app.get('/homemanager', (req, res)=> {
-    res.render('homemanager');
-});
+app.get('/register', getRegisterPage);
+app.get('/adminemailFail',getEmailFail);
+app.get('/adminCheckFail',getUserFail);
+app.get('/adminpassFail', getPassFail);
+app.get('/gettoLogin',getLoginPage);
 
 //handling post request
-app.post('/authman', function(request, response) {
-    var username = request.body.username;
-    var password = request.body.password;
-    if (username && password) {
-        connection.query('select * from manager where username = ? and password = ?', [username, password], function(error, results, fields) {
-            if(results.length > 0) {
-                request.session.loggedin = true;
-                request.session.username = username;
-                response.redirect('homemanager');
-            } else {
-                response.send('Incorrect Username and/or Password!');
-            }
-            response.end();
-        });
-    } else {
-        response.send('Please enter a Username and Password!');
-        response.end();
-    }
-});
-app.post('/authadm', (request,response)=> {
-    var username = request.body.username1;
-    var password = request.body.password1;
-    if(username && password) {
-        connection.query('select * from admin where username = ? and password = ?', [username, password], (error, results, fields) =>{
-            if(results.length > 0) {
-                request.session.loggedin = true;
-                request.session.username = username;
-                response.redirect('mainadmin');
-            } else {
-                response.send('Incorrect Username and/or Password!');
-            }
-            response.end();
-        });
-    }   else {
-            response.send('Please enter a Username and Password!');
-            response.end();
-    }
-});
-app.post('/cadmin', (request, response)=> {
-    var name = request.body.Aname;
-    var username = request.body.Ausername;
-    var password = request.body.Apassword;
-    var repassword = request.body.Arpassword;
-    var email = request.body.Aemail;
-    if(password == repassword) {
-        connection.query('Select * from admin where username = ?', [username], (error, results, fields)=> {
-            if(results.length > 0) {
-                response.redirect('register')
-            }
-        })
-        connection.query('Select * from admin where email_id = ?', [email], (error, results, fields)=> {
-            if(results.length > 0) {
-                response.send('Email already used by another admin!');
-                response.redirect('register')
-            }
-        })
-    } else {
-        response.send('Passwords do not match')
-        response.redirect('register')
-    }
-    
-})
+app.post('/authman', manAuthCheck);
+app.post('/authadm', admAuthCheck);
+app.get('/admAuthFail', getFaillogin);
+app.get('/manAuthFail', getFaillogin);
+app.post('/cadmin', AdminCheck); 
+
+app.get('/homemanager',getManagerD);
+
 
 
 
@@ -177,17 +108,17 @@ app.post('/cadmin', (request, response)=> {
 
 
 //catch 404 and forward to next handler
-app.use(function(req,res,next) {
-    next(CreateError(404));
-});
+// app.use(function(req,res,next) {
+//     next(CreateError(404));
+// });
 
-app.use(function(err, req, res, next) {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-    //render error page
-    res.status(err.status || 500);
-    res.render('error');
-})
+// app.use(function(err, req, res, next) {
+//     res.locals.message = err.message;
+//     res.locals.error = req.app.get('env') === 'development' ? err : {};
+//     //render error page
+//     res.status(err.status || 500);
+//     res.render('error');
+// })
 module.exports = app;
 
 

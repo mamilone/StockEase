@@ -13,7 +13,7 @@ body {
     width: 100%;
     margin: auto;
     max-width: 525px;
-    min-height: 670px;
+    min-height: 700px;
     position: relative;
     box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
     z-index: 2;
@@ -23,7 +23,7 @@ body {
     width: 100%;
     height: 100%;
     position: absolute;
-    padding: 90px 70px 50px 70px;
+    padding: 70px 70px 50px 70px;
     background: rgba(0, 77, 77, .9)
 }
 
@@ -205,11 +205,13 @@ a {
 
 
 .foot2 {
-    position: absolute;
-    text-align: center;
-    right: 140px;
-    bottom: 60px;
-    color: rgba(231, 236, 236, 0.815)
+    position: relative;
+    top: 180px;
+    color: rgb(231, 236, 236)
+}
+
+.foot2 a {
+    color: rgba(216, 202, 202, 0.76);
 }
 
 .card {
@@ -248,5 +250,5 @@ button {
     font-size: 24px;
     font-weight: 600;
     margin: 0 25px;
-    transition: 0.4s;
+    transition: 0.4s linear;
 }
