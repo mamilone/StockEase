@@ -41,10 +41,12 @@
     <!-- from here------------------------------------------------- -->
     <div class="adminprofile">
     <h1>ADMIN INFORMATION</h1>
-    <h6>Admin id:</h6>
-    <h6>username:</h6>
-    <h6>Email Id:</h6>
-    <h6>Password:</h6>
+    <% if(result.id) { %>
+    <h6>Admin id : <%= result.id%></h6>
+    <h6>username : <%= result.username%></h6>
+    <h6>Email Id : <%= result.email_id%></h6>
+    <h6>Password : </h6>
+    <% } %>
     <h1>WAREHOUSE INFORMATION</h1>
     <h6>Warehouse Id:</h6>
     <h6>Location:</h6>

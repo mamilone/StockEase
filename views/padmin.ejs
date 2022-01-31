@@ -76,12 +76,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <% if(rlength > 0) { %>
+                    <% results.forEach((results, index) => { %>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><%= results.id %></td>
+                        <td><%= results.name %></td>
+                        <td><%= results.type %></td>
                         <td><button class="remove"><span></span>REMOVE</button></td>
                     </tr>
+                    <% }) %>
+                    <%} else {%>
+                        <td>No Products present</td>
+                    <% } %>
                 </tbody>
             </table>
             <button class="add"><span></span>ADD PRODUCT</button>

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="register.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="D:\Stock-Ease\mamilone\logo.png" type="image">
-    <script defer src="register.js"></script>
 </head>
 <body>
     <div class="row">
@@ -15,37 +14,36 @@
                 <div class="manager-box">
                     <div class="logo"></div>
                     <div class="login-snip">
-                        <input id="tab-1" type="radio" name="tab" class="manager" checked><label for="tab-1" class="tab">Manager</label> 
-                        <input id="tab-2" type="radio" name="tab" class="Admin"><label for="tab-2" class="tab">Admin</label>
+                        <input id="tab-1" type="radio" name="tab" class="manager" onclick="man()" checked><label for="tab-1" class="tab">Manager</label> 
+                        <input id="tab-2" type="radio" name="tab" class="Admin" onclick="adm()"><label for="tab-2" class="tab">Admin</label>
                         <div class="user-login-space">
                             <div class="user-login">
-                                <div class="group"> <label for="user" class="label">Name</label> <input id="user" type="text" class="input" placeholder="Enter your Full Name"> </div>
-                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Create your Username"> </div>
-                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="text" class="input" placeholder="Enter your email address"> </div>
-                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password"> </div>
+                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Enter a Username"> </div>
+                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="email" class="input" placeholder="e.g. john@email.com"> </div>
+                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Type your password"> </div>
                                 <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Repeat your password"> </div>
+                                <div class="group"> <label for="user" class="label">Warehouse-ID</label> <input id="user" type="number" class="input" placeholder="Assigned Warehouse-ID"> </div>
                                 <div class="group"> <button type="submit" class="button1 button">Sign Up</button></div>
-                                <div class="hr"></div>
                             </div>
                             <div class="admin-login">
                                 <form action="cadmin" method="POST">
-                                <div class="group"> <label for="user" class="label">Name</label> <input id="user" type="text" class="input" name="Aname" placeholder="Enter your Full Name"> </div>
                                 <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" name="Ausername" placeholder="Create your Username"> </div>
-                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="text" class="input" 
-                                   name="Aemail" placeholder="Enter your email address"> </div>
+                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="email" class="input" name="Aemail" placeholder="e.g. john@email.com"> </div>
                                 <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" name="Apassword" placeholder="Create your password"> </div>
                                 <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" name="Arpassword" placeholder="Repeat your password"> </div>
+                                <div class="group"> <label for="user" class="label">Location</label> <input id="user" type="text" class="input" name="Alocation" placeholder="Enter Warehouse Location"> </div>
                                 <div class="group"> <button type="submit" class="button button1">Sign Up</button> </div>
-                                <div class="hr"></div>
                                 </form>
                             </div>
                         </div>
+                        <div class="foot2"><p>Already Registered?<a href="login">  Login</a></p></label></div>
                     </div>
-                    <div class="foot2"> <a href="login">Already Registered? Login</a></label></div>
                 </div>
             </div>
         </div>
     </div>
     </div>
+    <script>
+    </script>
 </body>
 </html>
