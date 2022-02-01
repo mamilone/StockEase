@@ -13,8 +13,8 @@ var flash = require('express-flash');
 var expressValidator = require('express-validator');
 const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
 const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail } = require('./routes/register');
-const { getAdminDetails, getManagerDetails, getProductDetails, getSuggestion } = require('./routes/admind');
-const { getManagerD } = require('./routes/mdetails');
+const { getAdminDetails, getManagerDetails, getSuggestion } = require('./routes/admind');
+const { getManagerD, getshipment, getrestock, getProductDetails, getwarehouse} = require('./routes/mdetails');
 const { delProduct } = require('./routes/AddDeleteProduct');
 require('dotenv').config();
 const database_name = 'stock-ease';
@@ -77,8 +77,13 @@ session.loggedin = false;
 app.get('/login', getLoginPage);
 app.get('/mainadmin', getAdminDetails);
 app.get('/sadmin', getSuggestion);
-app.get('/padmin', getProductDetails);
 app.get('/madmin', getManagerDetails);
+
+app.get('/mwarehouse',getwarehouse)
+app.get('/mproducts',getProductDetails)
+app.get('/mrestock',getrestock)
+app.get('/mshipment',getshipment)
+app.get('/mainmanager',getManagerD)
 
 app.get('/register', getRegisterPage);
 app.get('/adminemailFail',getEmailFail);

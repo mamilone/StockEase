@@ -71,3 +71,7 @@ header {
     visibility: visible;
     opacity: 1;
 }
+
+.input-field {
+    display: none;
+}

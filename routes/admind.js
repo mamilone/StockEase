@@ -19,19 +19,6 @@ module.exports = {
         }
     } ,
 
-    getProductDetails: (req, res)=> {
-        id = req.session.userID;
-        console.log(req.session);
-        connection.query('select * from product where warehouse_id = (select id from warehouse where admin_id = ?)',[id],(error, results, fields) =>{
-            rlength = results.length
-            console.log(results.length)
-            res.render('padmin',{
-                results,rlength
-            })
-        })
-        
-    } , 
-
     getManagerDetails : (req, res)=> {
         id = req.session.userID;
         console.log(req.session)

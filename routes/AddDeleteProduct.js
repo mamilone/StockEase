@@ -17,12 +17,12 @@ module.exports = {
     delProduct: (req, res) => {
         if(req.session.loggedin === true)
         {
-            var id = req.body.manID;
-            connection.query('delete from manager where id = ?',[id], (error, results, fields) =>{
+            var id = req.body.pid;
+            connection.query('delete from product where id = ?',[id], (error, results, fields) =>{
                 if(error) {
                     return res.status(500).send(error);
                 }
-                res.redirect('/madmin');
+                res.redirect('/mproducts');
             })
         }
     }
