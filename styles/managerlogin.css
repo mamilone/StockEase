@@ -75,3 +75,25 @@ header {
 .input-field {
     display: none;
 }
+.productadmin {
+    margin-left: 300px;
+    position: absolute;
+    top: 50px;
+}
+
+
+.managerprofile {
+    margin-left: 300px;
+    position: absolute;
+    top: 50px;
+}
+
+.managerprofile h1{
+    font-family: 'Libre Baskerville', serif;
+}
+.managerprofile h6{
+    /* padding:0%; */
+    color: black;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
