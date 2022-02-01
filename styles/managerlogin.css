@@ -21,7 +21,7 @@ header {
 
 
 
-.nav{
+.navi{
     top: 0;
     bottom: 50px;
     left: 0;
@@ -31,7 +31,7 @@ header {
     background: #d1a5a5a8;
 }
 
-.nav__link{
+.navi__link{
     display: flex;
     align-items: center;
     color: #413e3e;
@@ -42,20 +42,20 @@ header {
      
 }
 
-.nav__link > i {
+.navi__link > i {
     margin-right: 15px;
 }
 
-.nav__link--active {
+.navi__link--active {
     color: #27f8ce;
 }
 
-.nav__link--active,
-.nav__link:hover {
+.navi__link--active,
+.navi__link:hover {
     background: #8a6f6f;
 }
 
-.nav__overlay {
+.navi__overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -67,7 +67,7 @@ header {
     opacity: 0;
 }
 
-.nav--open .nav__overlay {
+.navi--open .navi__overlay {
     visibility: visible;
     opacity: 1;
 }

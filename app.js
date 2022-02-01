@@ -28,7 +28,7 @@ var connection = mysql.createConnection({
     user    : 'root',
     password: "",
     database: 'stock-ease',
-    port:3306
+    port:4000
 });
 
 
