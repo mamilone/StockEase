@@ -1,5 +1,5 @@
 module.exports = {
-    getAdminDetails : (req, res)=> {
+    getAdminDetail : (req, res)=> {
         var username = req.session.username;
         if(req.session.loggedin === true && username)
         {
@@ -7,12 +7,12 @@ module.exports = {
                 req.session.userID = results[0].id;
                 id = req.session.userID;
                 console.log(req.session);
-                connection.query('select * from warehouse where admin_id = ?',[id], function (error, wResult, fields) {
-                    lengthW = wResult.length
+                connection.query('select * from warehouse where admin_id = ?',[id], function (error, wResults, fields) {
                     let result = results[0];
-                    console.log(result,wResult,lengthW);
+                    let wResult = wResults[0];
+                    console.log(result,wResults[0]);
                     res.render('mainadmin',{
-                        result,wResult,lengthW 
+                        result,wResult
                     })
                 });
             });

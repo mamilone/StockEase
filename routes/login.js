@@ -14,8 +14,8 @@ module.exports={
                 if(results.length > 0) {
                     request.session.loggedin = true;
                     request.session.username = username;
-                    request.session.mid = results[0].id;
-                    response.redirect('/homemanager');
+                    request.session.userID = results[0].id;
+                    response.redirect('/mainmanager');
                 } else {
                     request.session.loggedin = false;
                     response.redirect('/manAuthFail');

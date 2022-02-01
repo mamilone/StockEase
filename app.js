@@ -13,9 +13,10 @@ var flash = require('express-flash');
 var expressValidator = require('express-validator');
 const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
 const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail } = require('./routes/register');
-const { getAdminDetails, getManagerDetails, getSuggestion } = require('./routes/admind');
+const { getAdminDetail, getManagerDetails, getSuggestion } = require('./routes/admind');
 const { getManagerD, getshipment, getrestock, getProductDetails, getwarehouse} = require('./routes/mdetails');
 const { delProduct } = require('./routes/AddDeleteProduct');
+const { getSectionDetails } = require('./routes/AddDeleteSection');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
@@ -72,18 +73,17 @@ app.get('/home', (req, res)=> {
     res.render('home');
 })
 
-session.loggedin = false;
-
 app.get('/login', getLoginPage);
-app.get('/mainadmin', getAdminDetails);
+app.get('/mainadmin', getAdminDetail);
 app.get('/sadmin', getSuggestion);
 app.get('/madmin', getManagerDetails);
+app.get('/secadmin',getSectionDetails);
 
-app.get('/mwarehouse',getwarehouse)
-app.get('/mproducts',getProductDetails)
-app.get('/mrestock',getrestock)
-app.get('/mshipment',getshipment)
-app.get('/mainmanager',getManagerD)
+app.get('/mwarehouse',getwarehouse);
+app.get('/mproducts',getProductDetails);
+app.get('/mrestock',getrestock);
+app.get('/mshipment',getshipment);
+app.get('/mainmanager',getManagerD);
 
 app.get('/register', getRegisterPage);
 app.get('/adminemailFail',getEmailFail);
@@ -98,7 +98,6 @@ app.get('/admAuthFail', getFaillogin);
 app.get('/manAuthFail', getFaillogin);
 app.post('/cadmin', AdminCheck); 
 
-app.get('/homemanager',getManagerD);
 app.post('/authdelete',delProduct);
 app.post('/addManager',)
 app.post('/logout',getLogoutCheck);

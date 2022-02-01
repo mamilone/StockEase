@@ -35,7 +35,7 @@
             </a>
             <a href="mproducts" class="navi__link">
                 <i class="material-icons">inventory</i>
-                Product
+                Products
             </a>
             <a href="mainmanager" class="navi__link navi__link--active">
                 <i class="material-icons">account_circle</i>
@@ -45,13 +45,17 @@
         <div class="navi__overlay"></div>
     </nav>
     <div class="managerprofile">
-       <h1>MANAGER DETAILS</h1>
-       <h6>Manager ID : </h6>
-       <h6>Username : </h6>
-       <h6>Email ID : </h6>
-       <h1>WAREHOUSE INFORMATION</h1>
-       <h6>Warehouse ID : </h6>
-       <h6>Location : </h6>
+            <h1>MANAGER INFORMATION</h1>
+        <% if(result.id) { %>
+            <h6>Manager Id : <%= result.id%></h6>
+            <h6>username : <%= result.username%></h6>
+            <h6>Email Id : <%= result.email_id%></h6>
+            <% } %>
+            <h1>WAREHOUSE INFORMATION</h1>
+            <% if(wResult.id) { %>
+            <h6>Warehouse Id: <%= wResult.id %></h6>
+            <h6>Location: <%= wResult.location %></h6>
+            <% } %>
     </div>
 </body>
 </html>
