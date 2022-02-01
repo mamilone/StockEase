@@ -29,7 +29,7 @@ var connection = mysql.createConnection({
     user    : 'root',
     password: "",
     database: 'stock-ease',
-    port:4000
+    port:3306
 });
 
 

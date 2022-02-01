@@ -41,16 +41,16 @@
     </nav>
     <!-- from here------------------------------------------------- -->
     <div class="adminprofile">
-    <h1>ADMIN INFORMATION</h1>
+    <h1>ADMIN INFORMATION</h1><br>
     <% if(result.id) { %>
-    <h6>Admin id : <%= result.id%></h6>
-    <h6>username : <%= result.username%></h6>
-    <h6>Email Id : <%= result.email_id%></h6>
+    <h6>Admin id : <%= result.id%></h6><br>
+    <h6>username : <%= result.username%></h6><br>
+    <h6>Email Id : <%= result.email_id%></h6><br>
     <% } %>
-    <h1>WAREHOUSE INFORMATION</h1>
+    <h1>WAREHOUSE INFORMATION</h1><br>
     <% if(wResult.id) { %>
-    <h6>Warehouse Id: <%= wResult.id %></h6>
-    <h6>Location: <%= wResult.location %></h6>
+    <h6>Warehouse Id: <%= wResult.id %></h6><br>
+    <h6>Location: <%= wResult.location %></h6><br>
     <% } %>
     </div>
     <!-- till here----------------------------- -->

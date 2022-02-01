@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 body {
     --header-height: 50px;
 
@@ -17,6 +18,7 @@ header {
     height: 50px;
     background: #747474;
     /*display: flex;*/
+    z-index: 1;
 }
 
 
@@ -96,4 +98,65 @@ header {
     color: black;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
+}
+
+
+.section {
+    margin-left: 400px;
+    position: absolute;
+    top: 150px;
+}
+ 
+.a {
+    margin-left: 270px;
+    position: absolute;
+    top: 50px;
+}
+.b {
+    margin-left: 700px;
+    position: absolute;
+    top: 50px;
+}
+.c {
+    margin-left: 1100px;
+    position: absolute;
+    top: 50px;
+}
+ 
+.type {
+    margin-left: 700px;
+    position: absolute;
+    top: 150px;
+}
+
+.sectiontable {
+    margin-left: 400px;
+    position: absolute;
+    top: 220px;
+}
+
+.a h2 {
+    font-family: 'Libre Baskerville', serif;
+}
+
+
+.b h2 {
+    font-family: 'Libre Baskerville', serif;
+}
+
+
+.c h2 {
+    font-family: 'Libre Baskerville', serif;
+}
+
+.section h3 {
+    font-family: 'Libre Baskerville', serif;
+}
+
+.type h3 {
+    font-family: 'Libre Baskerville', serif;
+}
+
+.sectiontable {
+    font-family: 'Libre Baskerville', serif;
 }
