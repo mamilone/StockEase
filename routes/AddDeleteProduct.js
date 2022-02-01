@@ -1,16 +1,20 @@
-const Connection = require("mysql/lib/Connection");
-const { DEC8_BIN } = require("mysql/lib/protocol/constants/charsets");
-
 module.exports = {
-    getAdminAddProduct: (req, res) => {
+    AddProduct: (req, res) => {
         if(req.session.loggedin === true)
         {
-            result = [
-                Pname = "Enter the Name of the product",
-                price = "Enter the price",
-                category = "Enter the Type of product (e.g. dove is categorized as essentials)",
-            ]
-            res.render('Aadd')
+            var name = req.body.pname;
+            var type = req.body.ptype;
+            var id = req.session.wID;
+            connection.query('select * from product where name = ? && type = ?',[name,type], (error, results, fields)=>{
+                console.log(results);
+                if(results.length > 0) {
+                    res.redirect('/mproducts');
+                } else {
+                    connection.query('insert into product (name,type,warehouse_id) values (?,?,?)',[name,type,id], (error, results, fields) =>{
+                        res.redirect('/mproducts')
+                    })
+                }
+            })
         }
     },
 

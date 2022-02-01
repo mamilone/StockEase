@@ -5,9 +5,6 @@ const exphbs = require('express-handlebars');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
-var CreateError = require('http-errors');
-var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var flash = require('express-flash');
 var expressValidator = require('express-validator');
@@ -15,8 +12,8 @@ const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}
 const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail } = require('./routes/register');
 const { getAdminDetail, getManagerDetails, getSuggestion } = require('./routes/admind');
 const { getManagerD, getshipment, getrestock, getProductDetails, getwarehouse} = require('./routes/mdetails');
-const { delProduct } = require('./routes/AddDeleteProduct');
-const { getSectionDetails } = require('./routes/AddDeleteSection');
+const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
+const { getSectionDetails, addSection } = require('./routes/AddDeleteSection');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
@@ -102,6 +99,8 @@ app.post('/authdelete',delProduct);
 app.post('/addManager',)
 app.post('/logout',getLogoutCheck);
 
+app.post('/addSection',addSection);
+app.post('/addProduct', AddProduct);
 
 
 
@@ -117,18 +116,7 @@ app.post('/logout',getLogoutCheck);
 
 
 
-//catch 404 and forward to next handler
-// app.use(function(req,res,next) {
-//     next(CreateError(404));
-// });
 
-// app.use(function(err, req, res, next) {
-//     res.locals.message = err.message;
-//     res.locals.error = req.app.get('env') === 'development' ? err : {};
-//     //render error page
-//     res.status(err.status || 500);
-//     res.render('error');
-// })
 module.exports = app;
 
 
