@@ -1,5 +1,7 @@
 module.exports={
     getLoginPage: (req, res) => {
+        req.session.loggedin = false;
+        console.log(req.session);
         res.render('login',{
             title: 'Login',
             loginMSG:''

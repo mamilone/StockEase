@@ -41,6 +41,7 @@
     </nav>
     <!-- from here------------------------------------------------- -->
     <div class="adminprofile">
+<<<<<<< HEAD
     <h1>ADMIN INFORMATION</h1><br>
     <% if(result.id) { %>
     <h6>Admin id : <%= result.id%></h6><br>
@@ -51,6 +52,18 @@
     <% if(wResult.id) { %>
     <h6>Warehouse Id: <%= wResult.id %></h6><br>
     <h6>Location: <%= wResult.location %></h6><br>
+=======
+    <h1>ADMIN INFORMATION</h1>
+    <% if(wresult.id) { %>
+    <h6>Admin id : <%= wresult.id%></h6>
+    <h6>username : <%= wresult.username%></h6>
+    <h6>Email Id : <%= wresult.email_id%></h6>
+    <% } %>
+    <h1>WAREHOUSE INFORMATION</h1>
+    <% if(result.id) { %>
+    <h6>Warehouse Id: <%= result.id %></h6>
+    <h6>Location: <%= result.location %></h6>
+>>>>>>> b7485a5dadfeb6fa66baf6829c7cf201c33171c0
     <% } %>
     </div>
     <!-- till here----------------------------- -->
