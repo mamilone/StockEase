@@ -4,6 +4,7 @@ body {
 
     margin: var(--header-heigth) 0 0 0;
     font-family: sans-serif;
+    background-color: #edeef6;
 }
 
 header {
@@ -22,8 +23,8 @@ header {
 
 
 
-.nav{
-    top: 0;
+.navi{
+    top: 50px;
     bottom: 50px;
     left: 0;
     z-index: 1;
@@ -32,7 +33,7 @@ header {
     background: #d1a5a5a8;
 }
 
-.nav__link{
+.navi__link{
     display: flex;
     align-items: center;
     color: #413e3e;
@@ -43,20 +44,20 @@ header {
      
 }
 
-.nav__link > i {
+.navi__link > i {
     margin-right: 15px;
 }
 
-.nav__link--active {
+.navi__link--active {
     color: #27f8ce;
 }
 
-.nav__link--active,
-.nav__link:hover {
+.navi__link--active,
+.navi__link:hover {
     background: #8a6f6f;
 }
 
-.nav__overlay {
+.navi__overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -68,7 +69,7 @@ header {
     opacity: 0;
 }
 
-.nav--open .nav__overlay {
+.navi--open .navi__overlay {
     visibility: visible;
     opacity: 1;
 }
@@ -88,72 +89,6 @@ header {
     position: absolute;
     top: 50px;
 }
-/* this is for add button,which is working fine  */
-button{
-    text-align: center;
-    border-radius: 0px;
-    font-weight:normal;
-    border: 2px solid #000000;
-    background: transparent;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-size: 15px;   
-    font-family: 'Libre Baskerville', serif;
-}
-span{ 
-    background: #40d31b;
-    height: 100%;
-    width: 0%;
-    border-radius: 0px;
-    border-color: #000000;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: 0;
-}
-button:hover span{
-    width: 100%;
-}
-button:hover{
-    border: none;
-} 
-/* this is for remove button,check whether i've made mistake most probably in class  */
-.remove button{
-    text-align: center;
-    border-radius: 2px;
-    font-weight:normal;
-    border: 2px solid #000000;
-    background: transparent;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-size: 15px; 
-    /*   */
-}
-.remove span{
-    background: #d40707;
-    height: 100%;
-    width: 100%;
-    border-radius: 3px;
-    border-color: #000000;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: 0;
-}
-.remove button:hover span{
-    width: 100%;
-}
-.remove button:hover{
-    border: none;
-    /* display: inline-block;
-    opacity: 1; */
-}
 
 .adminprofile h1{
     font-family: 'Libre Baskerville', serif;;
@@ -171,4 +106,13 @@ button:hover{
     font-family: 'Libre Baskerville', serif;;
 }
 
-/* till here */
+.input-field {
+    display: none;
+}
+
+
+.logout {
+    position: absolute;
+    top:4px;
+    right:4px
+}

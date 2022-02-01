@@ -51,5 +51,12 @@ module.exports={
             title: 'Login',
             loginMSG: 'Incorrect Username and/or Password'
         });
+    },
+
+    getLogoutCheck: (req,res)=>{
+        if(req.session.loggedin === true) {
+        req.session.loggedin = false;
+        req.redirect('/login');
+        }
     }
 };

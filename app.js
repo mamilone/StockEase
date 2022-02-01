@@ -11,10 +11,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var flash = require('express-flash');
 var expressValidator = require('express-validator');
-const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage}=require('./routes/login');
+const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
 const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail } = require('./routes/register');
 const { getAdminDetails, getManagerDetails, getProductDetails, getSuggestion } = require('./routes/admind');
 const { getManagerD } = require('./routes/mdetails');
+const { delProduct } = require('./routes/AddDeleteProduct');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
@@ -71,6 +72,8 @@ app.get('/home', (req, res)=> {
     res.render('home');
 })
 
+session.loggedin = false;
+
 app.get('/login', getLoginPage);
 app.get('/mainadmin', getAdminDetails);
 app.get('/sadmin', getSuggestion);
@@ -91,6 +94,9 @@ app.get('/manAuthFail', getFaillogin);
 app.post('/cadmin', AdminCheck); 
 
 app.get('/homemanager',getManagerD);
+app.post('/authdelete',delProduct);
+app.post('/addManager',)
+app.post('/logout',getLogoutCheck);
 
 
 
