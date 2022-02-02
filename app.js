@@ -13,7 +13,8 @@ const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail } = 
 const { getAdminDetail, getManagerDetails, getSuggestion } = require('./routes/admind');
 const { getManagerD, getshipment, getrestock, getProductDetails, getwarehouse} = require('./routes/mdetails');
 const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
-const { getSectionDetails, addSection } = require('./routes/AddDeleteSection');
+const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
+const { ManagerAdd, checkManagerDel } = require('./routes/AddDeleteManager');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
@@ -70,7 +71,7 @@ app.get('/home', (req, res)=> {
     res.render('home');
 })
 
-app.get('/login', getLoginPage);
+app.all('/login', getLoginPage);
 app.get('/mainadmin', getAdminDetail);
 app.get('/sadmin', getSuggestion);
 app.get('/madmin', getManagerDetails);
@@ -96,12 +97,13 @@ app.get('/manAuthFail', getFaillogin);
 app.post('/cadmin', AdminCheck); 
 
 app.post('/authdelete',delProduct);
-app.post('/addManager',)
 app.post('/logout',getLogoutCheck);
 
 app.post('/addSection',addSection);
+app.post('/secDelete',delSection);
 app.post('/addProduct', AddProduct);
-
+app.post('/addManager',ManagerAdd);
+app.post('/delManager',checkManagerDel);
 
 
 

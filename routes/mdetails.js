@@ -1,3 +1,5 @@
+const session = require("express-session");
+
 module.exports = {
     getManagerD: (req, res)=> {
         var username = req.session.username;
@@ -24,14 +26,19 @@ module.exports = {
     },
 
     getshipment: (req, res)=>{
-        res.render('mshipment')
+        if(req.session.loggedin === true) {
+            res.render('mshipment')
+        }
     },
     getwarehouse: (req,res)=>{
-        
-        res.render('mwarehouse')
+        if(req.session.loggedin === true) {
+            res.render('mwarehouse')
+        }
     },
     getrestock: (req,res)=>{
-        res.render('mrestock')
+        if(req.session.loggedin === true) {
+            res.render('mrestock')
+        }
     },
     getProductDetails: (req, res)=> {
         if(req.session.loggedin === true) {
@@ -43,7 +50,7 @@ module.exports = {
                     rlength = results.length
                     console.log(results.length)
                     res.render('mproducts',{
-                        results,rlength,cresults
+                        results,rlength,cresults,crlength
                     })
                 })
             })

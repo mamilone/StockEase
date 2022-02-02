@@ -3,7 +3,6 @@ module.exports={
         req.session.loggedin = false;
         console.log(req.session);
         res.render('login',{
-            title: 'Login',
             loginMSG:''
         })
     },
@@ -50,7 +49,6 @@ module.exports={
 
     getFaillogin: (req, res) => {
         res.render('login',{
-            title: 'Login',
             loginMSG: 'Incorrect Username and/or Password'
         });
     },
@@ -58,7 +56,8 @@ module.exports={
     getLogoutCheck: (req,res)=>{
         if(req.session.loggedin === true) {
         req.session.loggedin = false;
-        req.redirect('/login');
+        console.log(req.session);
+        res.redirect('/login');
         }
     }
 };

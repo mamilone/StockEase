@@ -14,6 +14,9 @@
         <h3 id="btnNav">
            STOCK EASE
         </h3>
+        <form action="logout" method="POST">
+            <button type="submit" class="btn btn-danger logout">Logout</button>
+        </form>
     </header>
     <nav class="navi">
         <div class="navi__links">
@@ -38,7 +41,6 @@
                 Profile
             </a>
         </div>
-        <div class="navi__overlay"></div>
     </nav>
     <!-- from here------------------------------------------------- -->
     <div class="productadmin">
@@ -62,7 +64,7 @@
                         <td><%= results.name %></td>
                         <td><%= results.product_type %></td>
                         <td><%= results.cat_count %></td>
-                        <td><form action="authdelete" method="POST">
+                        <td><form action="secDelete" method="POST">
                             <input value = "<%= results.id%>" type="text" name = "secID" class = "input-field">
                             <button type="submit" class="btn btn-danger">Remove</button>
                         </form></td>                    
@@ -91,13 +93,14 @@
                 <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="sname" placeholder="e.g. A, B, C">
                   </div>
+                <br>
                 <h5>Product Type</h5>
                 <div class="input-group mb-3">
                     <select name="stype" class="form-select" id="inputGroupSelect02">
                       <option selected>Choose...</option>
-                      <% if(rlength > 0) { %>
-                        <% results.forEach((results, index) => { %>
-                      <option name="stype" value="<%= results.product_type %>"><%=results.product_type%></option>
+                      <% if(crlength > 0) { %>
+                        <% cresults.forEach((cresults, index) => { %>
+                      <option name="stype" value="<%= cresults.type %>"><%=cresults.type%></option>
                       <% }) %>
                       <% } %>
                     </select>
@@ -106,6 +109,11 @@
                 <h5>Shelf Count:</h5>
                 <div class="input-group input-group-sm mb-3">
                     <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="scount">
+                </div>
+                <br>
+                <h5>Allotment size for each Shelf</h5>
+                <div class="input-group input-group-sm mb-3">
+                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="cat_count">
                 </div>
             </div>
             <div class="modal-footer">
@@ -116,31 +124,5 @@
           </div>
         </div>
       </div>
-      <!-- 
-      <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Alert</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p></p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <script>
-            var myModal = document.getElementById('myModal')
-            var myInput = document.getElementById('myInput')
-
-            myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-})
-      </script>
 </body>
 </html>

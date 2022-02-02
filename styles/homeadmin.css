@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+* {
+    max-width: 100%;
+}
+
 body {
     --header-height: 50px;
 
@@ -59,22 +63,6 @@ header {
     background: #8a6f6f;
 }
 
-.navi__overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    /*background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);*/
-    visibility: hidden;
-    opacity: 0;
-}
-
-.navi--open .navi__overlay {
-    visibility: visible;
-    opacity: 1;
-}
 /* The changes i've made is from here */
 .adminprofile {
     margin-left: 300px;
