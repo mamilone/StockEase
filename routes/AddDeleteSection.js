@@ -34,8 +34,8 @@ module.exports = {
                         console.log(results);
                         sec_id = results[0].id;
                         let i;
-                        for( i=1 ; i <= cat_count ; i++) {
-                            connection.query('insert into category (category_number,section_id) values (?,?)',[i,sec_id], (error, results, fields) =>{
+                        for( i=1 ; i <= count ; i++) {
+                            connection.query('insert into category (category_number,section_id,allot_size) values (?,?,?)',[i,sec_id,cat_count], (error, results, fields) =>{
                                 console.log(error);
                             })
                         }
