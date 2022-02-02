@@ -34,7 +34,7 @@ module.exports={
                     request.session.loggedin = true;
                     request.session.username = username;
                     request.session.userID = results[0].id;
-                    response.redirect('mainadmin');
+                    response.redirect('/mainadmin');
                 } else {
                     request.session.loggedin = false;
                     response.redirect('/admAuthFail');
