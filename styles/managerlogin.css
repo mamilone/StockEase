@@ -164,3 +164,38 @@ header {
 .sectiontable {
     font-family: 'Libre Baskerville', serif;
 }
+.a1 {
+    margin-left: 300px;
+    position: absolute;
+    top: 50px;
+}
+.a2 {
+    margin-left: 300px;
+    position: absolute;
+    top: 200px;
+}
+.a3 {
+    margin-left: 300px;
+    position: absolute;
+    top: 350px;
+}
+.a1 h2 {
+    font-family: 'Libre Baskerville', serif;
+}
+.a2 h2 {
+    font-family: 'Libre Baskerville', serif;
+}
+.a3 h2 {
+    font-family: 'Libre Baskerville', serif;
+}
+
+.butt {
+    margin-left: 300px;
+    position: absolute;
+    top: 500px;
+}
+.ship {
+    margin-left: 300px;
+    position: absolute;
+    top: 500px;
+}
