@@ -15,6 +15,7 @@ const { getManagerD, getshipment, getrestock, getProductDetails, getwarehouse} =
 const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
 const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
 const { ManagerAdd, checkManagerDel } = require('./routes/AddDeleteManager');
+const { ViewStocks } = require('./routes/AddDeleteViewStocks');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
@@ -22,7 +23,8 @@ var app = express();
 const port = process.env.PORT || 5000;
 
 //connecting mysql database
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
+    connectionLimit:10,
     host    : 'localhost',
     user    : 'root',
     password: "",
@@ -32,10 +34,10 @@ var connection = mysql.createConnection({
 
 
 
-connection.connect((err)=>{
-    if(err) throw err;
-    console.log(`connected to ${database_name} Database`)
-});
+// connection.connect((err)=>{
+//     if(err) throw err;
+//     console.log(`connected to ${database_name} Database`)
+// });
 global.connection = connection;
 
 
@@ -77,7 +79,7 @@ app.get('/sadmin', getSuggestion);
 app.get('/madmin', getManagerDetails);
 app.get('/secadmin',getSectionDetails);
 
-app.get('/mwarehouse',getwarehouse);
+app.get('/mwarehouse',ViewStocks);
 app.get('/mproducts',getProductDetails);
 app.get('/mrestock',getrestock);
 app.get('/mshipment',getshipment);

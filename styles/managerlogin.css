@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+
 body {
     --header-height: 50px;
 
@@ -30,6 +31,7 @@ header {
     height: 100vh;
     width: 250px;
     background: #d1a5a5a8;
+    z-index: 1;
 }
 
 .navi__link{
@@ -56,23 +58,6 @@ header {
     background: #8a6f6f;
 }
 
-.navi__overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    /*background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);*/
-    visibility: hidden;
-    opacity: 0;
-}
-
-.navi--open .navi__overlay {
-    visibility: visible;
-    opacity: 1;
-}
-
 .input-field {
     display: none;
 }
@@ -93,7 +78,6 @@ header {
     font-family: 'Libre Baskerville', serif;
 }
 .managerprofile h6{
-    /* padding:0%; */
     color: black;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
@@ -107,7 +91,7 @@ header {
 
 .section {
     margin-left: 400px;
-    position: absolute;
+    position: relative;
     top: 150px;
 }
  
@@ -128,14 +112,14 @@ header {
 }
  
 .type {
-    margin-left: 700px;
-    position: absolute;
+    margin-left: 400px;
+    position: relative;
     top: 150px;
 }
 
 .sectiontable {
     margin-left: 400px;
-    position: absolute;
+    position: relative;
     top: 220px;
 }
 
