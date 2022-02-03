@@ -27,7 +27,6 @@ module.exports = {
                         clength = cresult.length;
                         total_slot = results;
                         temp_slot = results;
-                        avail_slot = results;
 
                         connection.query('select cat_number as category_number,section_id,count(*) as allot_size from stores where cat_number in (select category_number from category where section_id in (select id from section where warehouse_id = ?)) and section_id in (select id from section where warehouse_id = ?) group by cat_number,section_id',[wid,wid], (error, results, fields) =>{
                             filled_slot = results;
@@ -36,7 +35,7 @@ module.exports = {
                             console.log("total",total_slot,"filled",filled_slot);
                             // console.log("avail",avail_slot);
                             res.render('mwarehouse',{
-                                wresult,sresult,cresult,total_slot,filled_slot,wlength,slength,clength,avail_slot
+                                wresult,sresult,cresult,total_slot,filled_slot,wlength,slength,clength
                             });
                         })
                     })
