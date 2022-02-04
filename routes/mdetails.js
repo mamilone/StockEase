@@ -16,7 +16,6 @@ module.exports = {
                 connection.query('select * from warehouse where id = (select warehouse_id from manager where id = ?)',[id], function (error, wResults, fields) {
                     let result = results[0];
                     let wResult = wResults[0];
-                    console.log(result,wResults[0]);
                     res.render('mainmanager',{
                         result,wResult
                     })
@@ -27,12 +26,20 @@ module.exports = {
 
     getshipment: (req, res)=>{
         if(req.session.loggedin === true) {
-            res.render('mshipment')
-        }
-    },
-    getwarehouse: (req,res)=>{
-        if(req.session.loggedin === true) {
-            res.render('mwarehouse')
+            var mid = req.session.userID;
+            var ptype = [],cresult = [],count = 0;
+            connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (error, results, fields) =>{
+                // console.log(results)
+                presult = results;
+                connection.query('select type from product group by type',[], (error, results, fields) =>{
+                    // console.log(results);
+                    tresult = results;
+                    ptype = results;
+                    res.render('mshipment',{
+                        presult,tresult,cresult,count
+                    })
+                })
+            })
         }
     },
     getrestock: (req,res)=>{
@@ -48,7 +55,7 @@ module.exports = {
                 crlength = cresults.length;
                 connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[id],(error, results, fields) =>{
                     rlength = results.length
-                    console.log(results.length)
+                    // console.log(results.length)
                     res.render('mproducts',{
                         results,rlength,cresults,crlength
                     })

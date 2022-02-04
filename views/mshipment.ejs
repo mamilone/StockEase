@@ -43,34 +43,48 @@
             </a>
         </div>
     </nav>
+    <form action="checkAll" method="post">
     <div class="a1">
         <h2>Product Type</h2>
         <div class="input-group mb-3">
-            <select name="ptype" class="form-select" id="inputGroupSelect02">
-                <option selected>Choose...</option>
-                <option name="ptype" value="chaddi">chaddi</option>
+            <select name="ptype" type="submit" class="form-select" id="inputGroupSelect02">
+                <option selected>choose..</option>
+                <% if(tresult.length > 0) {%>
+                    <% tresult.forEach((tresult, index) =>{ %>
+                        <option name="ptype" value="<%= tresult.type %>"><%= tresult.type %></option>
+                    <% }) %>
+                <% } %>
             </select>
         </div>
     </div>
     <div class="a2">
         <h2>Product Name</h2>
         <div class="input-group mb-3">
-            <select name="ntype" class="form-select" id="inputGroupSelect02">
-                <option selected>Choose...</option>
-                <option name="ntype" value="aimon ki chaddi">aimon ki chaddi</option>
+            <select name="pname" class="form-select" type="submit" id="inputGroupSelect02">
+                <option selected>choose..</option>
+                <% if(presult.length > 0) {%>
+                    <% presult.forEach((presult, index) =>{ %>
+                        <% if(presult.product_name != '') { %>
+                            <option name="ptype" value="<%= presult.name %>"><%= presult.name %></option>
+                        <% } %>
+                    <% }) %>
+                <% } %>
             </select>
         </div>
     </div>
     <div class="a3">
         <h2>Quantity</h2>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Number of products" name="usrname">
+            <input type="number" max="" class="form-control" name="pcount">
         </div>
     </div>
     <div class="ship">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span></span>SHIP</button>
+    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span></span>SHIP</button>
    </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+</form>
+    <%= console.log("results",cresult); %>
+    <% if(cresult.length > 0) { %>
+    <div class="modal"  tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
            <div class="modal-content">
                <form action="addProduct" method="post">
@@ -79,32 +93,30 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h5>Product Name:</h5>
-                <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="pname" placeholder="e.g. dove soap etc">
-                  </div>
-                <h5>Product Type</h5>
-                <div class="input-group mb-3">
-                    <select name="ptype" class="form-select" id="inputGroupSelect02">
-                      <option selected>Choose...</option>
-                      <option name="ptype" value="chaddi">chaddi</option>
-                    </select>
-                </div>
-
-                <h5>Quantity</h5>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Number of products" name="usrname">
-                </div>
-
-            </div>
+            <%if(count == 0) { %> 
+             <h5>Enter the quantity First !</h5> 
+            <% } else { %> 
+                <% for(var i = 0 ; i < cresult.length ; i++) { %>
+                    <%  if(cresult[i].count == 0) { %>
+                            <%continue;%>
+                        <%} else if(count <= cresult[i].count) {%>
+                            <h5><%=count%> items from category <%=cresult[i].category_number%> stored in section <%=cresult[i].name %></h5>
+                            <% break %>
+                        <% } else { %> 
+                            <% if(count!= 0) { %>
+                                <h5><%=cresult[i].count%>items from category <%=cresult[i].category_number%> stored in section <%= cresult[i].name %></h5>
+                            <% } %>
+                        <% } %>
+                <% } %>
+            <% } %>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
               <button type="submit" class="btn btn-primary">CONFIRM</button>
             </div>
-        </form>
-          </div>
+            </form>
+            </div>
         </div>
-      </div>
-    
+        </div>
+    <% } %>
 </body>
 </html>

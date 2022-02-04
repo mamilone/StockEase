@@ -14,30 +14,44 @@ module.exports = {
         var repassword = request.body.Arpassword;
         var location = request.body.Alocation;
         var email = request.body.Aemail;
-        connection.query('Select username from admin where username = ?' [username], (error, results, fields)=> {
-            if(results) {
+        console.log(email,username);
+        console.log(typeof(email))
+        console.log(typeof(username))
+        connection.query('Select username from admin where username = ?', [username], (error, results, fields)=> {
+            console.log("error",error,"results",results,"fields",fields)
+            if(results.length > 0) {
                 response.redirect('adminCheckFail');
-            }
-        })
-        connection.query('Select * from admin where email_id = ?', [email], (error, results, fields)=> {
-            if(results) {
-                response.send('Email already used by another admin!');
-                response.redirect('adminemailFail')
-            }
-        })
-        if(password == repassword) {
-            connection.query('insert into admin (username,email,password) values (?,?,?)', [username,email,password], function (error, results, fields) {
-                connection.query('Select id from admin where username = ?', [username], (error, result, fields)=> {
-                    console.log(result)
-                    var admin_id = result[0].id;
-                    connection.query('insert into warehouse (location,admin_id) values (?,?,?)', [location,admin_id], (error, results, fields) =>{
-                        response.redirect('gettoLogin')
-                    }) 
+            } else {
+                var email = request.body.Aemail;
+                connection.query('Select email_id from admin where email_id = ?', [email], (error, results, fields)=> {
+                    console.log(results);
+                    if(results.length > 0) {
+                        response.redirect('adminemailFail')
+                    } else {             
+                        if(password == repassword) {
+                            connection.query('insert into admin (username,email_id,password) values (?,?,?)', [username,email,password], (error, results, fields) =>{
+                                console.log("error",error,"results",results,"fields",fields)
+                                connection.query('Select id from admin where username = ?', [username], (error, result, fields)=> {
+                                    console.log(result)
+                                    var admin_id = result[0].id;
+                                    connection.query('insert into warehouse (location,admin_id) values (?,?)', [location,admin_id], (error, results, fields) =>{
+                                        if (error) throw error;
+                                        else {
+                                        response.redirect('gettologin')
+                                        }
+                                    }) 
+                                })
+                            })
+                        } else {
+                            response.redirect('adminpassFail')
+                        }
+                    }
                 })
-            })
-        } else {
-            response.redirect('adminpassFail')
-        }
+            }
+        })
+    },
+
+    ManRegCheck : (req, res) =>{
         
     },
 

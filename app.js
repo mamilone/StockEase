@@ -1,5 +1,6 @@
 //including node_module packages in this file
 var mysql = require('mysql');
+const syncSql = require('sync-sql');
 var express = require('express');
 const exphbs = require('express-handlebars');
 var session = require('express-session');
@@ -7,15 +8,14 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var logger = require('morgan');
 var flash = require('express-flash');
-var expressValidator = require('express-validator');
 const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
 const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail } = require('./routes/register');
 const { getAdminDetail, getManagerDetails, getSuggestion } = require('./routes/admind');
-const { getManagerD, getshipment, getrestock, getProductDetails, getwarehouse} = require('./routes/mdetails');
+const { getManagerD, getshipment, getrestock, getProductDetails} = require('./routes/mdetails');
 const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
 const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
 const { ManagerAdd, checkManagerDel } = require('./routes/AddDeleteManager');
-const { ViewStocks } = require('./routes/AddDeleteViewStocks');
+const { ViewStocks, CheckShipStocks, DelStocks, calculateLocation } = require('./routes/AddDeleteViewStocks');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
@@ -23,21 +23,20 @@ var app = express();
 const port = process.env.PORT || 5000;
 
 //connecting mysql database
-var connection = mysql.createPool({
-    connectionLimit:10,
+var connection = mysql.createConnection({
     host    : 'localhost',
     user    : 'root',
     password: "",
-    database: 'stock-ease',
-    port:3306
+    database: database_name,
+    port:4000
 });
 
 
 
-// connection.connect((err)=>{
-//     if(err) throw err;
-//     console.log(`connected to ${database_name} Database`)
-// });
+connection.connect((err)=>{
+     if(err) throw err;
+     console.log(`connected to ${database_name} Database`)
+});
 global.connection = connection;
 
 
@@ -61,8 +60,8 @@ app.use(express.static('routes'));
 app.set('views','./views')
 app.set('view engine', 'ejs')
 
-app.use(flash());
-app.use(expressValidator());
+//app.use(flash());
+//app.use(expressValidator());
 
 
 app.get('', (req, res)=> {
@@ -108,11 +107,9 @@ app.post('/addManager',ManagerAdd);
 app.post('/delManager',checkManagerDel);
 
 
-
-
-
-
-
+app.post('/checkAll',CheckShipStocks);
+app.post('/confirmShip',DelStocks);
+app.get('/calculateLocation',calculateLocation);
 
 
 
