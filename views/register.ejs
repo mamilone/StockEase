@@ -18,15 +18,24 @@
                         <input id="tab-2" type="radio" name="tab" class="Admin" onclick="adm()"><label for="tab-2" class="tab">Admin</label>
                         <div class="user-login-space">
                             <div class="user-login">
-                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" placeholder="Enter a Username"> </div>
-                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="email" class="input" placeholder="e.g. john@email.com"> </div>
-                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Type your password"> </div>
-                                <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" placeholder="Repeat your password"> </div>
-                                <div class="group"> <label for="user" class="label">Warehouse-ID</label> <input id="user" type="number" class="input" placeholder="Assigned Warehouse-ID"> </div>
+                                <form action="cmanager" method="post">
+                                    <% if (registerMSG != '') { %>
+                                        <p class="text-center text-danger"><%= registerMSG %></p>
+                                    <% } %>
+                                <div class="group"> <label for="user" class="label">Name</label> <input id="user" type="text" class="input" name="mname" placeholder="Enter your Name"> </div>
+                                <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" name="muname" placeholder="Enter a Username"> </div>
+                                <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="email" class="input" name="memail" placeholder="e.g. john@email.com"> </div>
+                                <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" name="mpass" placeholder="Type your password"> </div>
+                                <div class="group"> <label for="pass" class="label">Repeat Password</label> <input id="pass" type="password" class="input" data-type="password" name="mrpass" placeholder="Repeat your password"> </div>
+                                <div class="group"> <label for="user" class="label">Warehouse-ID</label> <input id="user" type="number" class="input" name="mwid" placeholder="Assigned Warehouse-ID"> </div>
                                 <div class="group"> <button type="submit" class="button1 button">Sign Up</button></div>
+                                </form>
                             </div>
                             <div class="admin-login">
                                 <form action="cadmin" method="POST">
+                                    <% if (registerMSG != '') { %>
+                                        <p class="text-center text-danger"><%= registerMSG %></p>
+                                    <% } %>
                                 <div class="group"> <label for="user" class="label">Username</label> <input id="user" type="text" class="input" name="Ausername" placeholder="Create your Username"> </div>
                                 <div class="group"> <label for="pass" class="label">Email Address</label> <input id="pass" type="email" class="input" name="Aemail" placeholder="e.g. john@email.com"> </div>
                                 <div class="group"> <label for="pass" class="label">Password</label> <input id="pass" type="password" class="input" data-type="password" name="Apassword" placeholder="Create your password"> </div>

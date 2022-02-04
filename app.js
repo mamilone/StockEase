@@ -9,7 +9,7 @@ var path = require('path');
 var logger = require('morgan');
 var flash = require('express-flash');
 const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
-const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail } = require('./routes/register');
+const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail, ManRegCheck } = require('./routes/register');
 const { getAdminDetail, getManagerDetails, getSuggestion } = require('./routes/admind');
 const { getManagerD, getshipment, getrestock, getProductDetails} = require('./routes/mdetails');
 const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
@@ -96,6 +96,11 @@ app.post('/authadm', admAuthCheck);
 app.get('/admAuthFail', getFaillogin);
 app.get('/manAuthFail', getFaillogin);
 app.post('/cadmin', AdminCheck); 
+
+app.post('/cmanager',ManRegCheck);
+app.get('/manCheckFail',getUserFail);
+app.get('/manemailFail',getEmailFail);
+app.get('/manpassFail',getPassFail);
 
 app.post('/authdelete',delProduct);
 app.post('/logout',getLogoutCheck);

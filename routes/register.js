@@ -52,13 +52,53 @@ module.exports = {
     },
 
     ManRegCheck : (req, res) =>{
-        
+        var name = req.body.mname;
+        var username = req.body.muname;
+        var password = req.body.mpass;
+        var repassword = req.body.mrpass;
+        var email = req.body.memail;
+        var wid = req.body.mwid;
+        console.log(email,username);
+        connection.query('Select username from manager where username = ?', [username], (error, results)=> {
+            console.log("error",error,"results",results)
+            if(results.length > 0) {
+                res.redirect('manCheckFail');
+            } else {
+                connection.query('Select email_id from manager where email_id = ?', [email], (error, results)=> {
+                    console.log(results);
+                    if(results.length > 0) {
+                        res.redirect('manemailFail')
+                    } else {             
+                        if(password == repassword) {
+                            connection.query('select id from warehouse where id = ?',[wid],(error,results)=>{
+                                console.log(results);
+                                if(results.length > 0) {
+                                    connection.query('insert into manager (name,username,email_id,password,warehouse_id) values (?,?,?,?,?)', [name,username,email,password,wid], (error, results, fields) =>{
+                                        if(error) throw error
+                                        else {
+                                            res.redirect('gettologin');
+                                        }
+                                    })
+                                } else {
+                                    res.render('register',{
+                                        title: 'register',
+                                        registerMSG: 'Entered Warehouse ID does not Exist!'
+                                    })
+                                }
+                            })
+                        } else {
+                            response.redirect('manpassFail')
+                        }
+                    }
+                })
+            }
+        })
     },
 
     getEmailFail: (req, res) =>{
         res.render('register',{
             title:'register',
-            registerMSG: 'email already in use by another Admin!!'
+            registerMSG: 'email already in use by another User!!'
         })
     },
 
