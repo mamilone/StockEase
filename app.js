@@ -1,13 +1,10 @@
 //including node_module packages in this file
 var mysql = require('mysql');
-const syncSql = require('sync-sql');
 var express = require('express');
-const exphbs = require('express-handlebars');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
 var logger = require('morgan');
-var flash = require('express-flash');
 const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
 const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail, ManRegCheck } = require('./routes/register');
 const { getAdminDetail, getManagerDetails, getSuggestion } = require('./routes/admind');
