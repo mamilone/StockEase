@@ -43,65 +43,84 @@
             </a>
         </div>
     </nav>
+    <form action="checkAdd" method="post">
     <div class="a1">
         <h2>Product Type</h2>
         <div class="input-group mb-3">
             <select name="ptype" class="form-select" id="inputGroupSelect02">
                 <option selected>Choose...</option>
-                <option name="ptype" value="chaddi">chaddi</option>
+                <% if(type.length) { %>
+                    <% for( i = 0 ; i < type.length ; i++) { %>
+                        <option name="ptype" value="<%=type[i].type%>"><%=type[i].type %></option>
+                    <% } %>
+                <% } %>
             </select>
         </div>
     </div>
     <div class="a2">
         <h2>Product Name</h2>
         <div class="input-group mb-3">
-            <select name="ntype" class="form-select" id="inputGroupSelect02">
+            <select name="pname" class="form-select" id="inputGroupSelect02">
                 <option selected>Choose...</option>
-                <option name="ntype" value="aimon ki chaddi">aimon ki chaddi</option>
+                <% if(name.length > 0) { %>
+                    <% for(var i = 0 ; i < name.length ; i++) { %>
+                        <option name="pname" value="<%=name[i].name%>"><%= name[i].name %></option>
+                    <% } %>
+                <% } %>
             </select>
         </div>
     </div>
     <div class="a3">
         <h2>Quantity</h2>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Number of products" name="usrname">
+            <input type="number" class="form-control" placeholder="Number of products" name="pnum">
         </div>
     </div>
     <div class="butt">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span></span>ADD TO WAREHOUSE</button>
+        <button type="submit"class="btn btn-primary"><span></span>ADD TO WAREHOUSE</button>
     </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    </form>
+    <% if(stockMSG == 'Success' || stockMSG == 'Failure') { %>
+    <% if(num > 0) { %>
+        <h5><%=num%> items couldnt be added due to no availability of sections for <%=ttype%></h5>
+    <% } else if(num == 0) { %>
+        <h5>items have been Added Successfully! </h5>
+    <% } else if(stockMSG == 'Failure') {%>
+        <h5>No Section available to add items! Enquire with the admin to add Section for <%= ttype%></h5>
+    <% } else {console.log('exception')} %>
+    <% } else { %>
+        <% console.log('I have no Idea!!'); %>
+    <% } %>
+    <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
            <div class="modal-content">
-               <form action="addProduct" method="post">
             <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Add a Product</h5>
+              <h5 class="modal-title" id="staticBackdropLabel">Restock Status Message</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h5>Product Name:</h5>
-                <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="pname" placeholder="e.g. dove soap etc">
-                  </div>
-                <h5>Product Type</h5>
-                <div class="input-group mb-3">
-                    <select name="ptype" class="form-select" id="inputGroupSelect02">
-                      <option selected>Choose...</option>
-                      <option name="ptype" value="chaddi">chaddi</option>
-                    </select>
-                </div>
-                <h5>Quantity</h5>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Number of products" name="usrname">
-                </div>
+                <% if(num > 0) { %>
+                    <h5><%=num%> items couldnt be added due to no availability of sections for <%=ttype%></h5>
+                <% } else if(num == 0) { %>
+                    <h5>items have been Added Successfully! </h5>
+                <% } else if(stockMSG == 'Failure') {%>
+                    <h5>No Section available to add items! Enquire with the admin to add Section <%= ttype%></h5>
+                <% } else {} %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
               <button type="submit" class="btn btn-primary">Add</button>
             </div>
-        </form>
           </div>
         </div>
     </div>
+    <% if(stockMSG != '') { %>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js">
+        var $ = jQuery;
+            $(function () {
+                $("#staticBackdrop").modal('show');
+            })
+        </script>
+    <% } %>
 </body>
 </html>

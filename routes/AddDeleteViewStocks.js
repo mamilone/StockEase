@@ -10,7 +10,10 @@ module.exports = {
             count = req.body.pcount;
             console.log("name",name,"type",type)
              connection.query('select c.category_number,c.section_id,c.product_id,c.product_name,s.name from category c,section s where s.id = c.section_id and product_id = (select id from product where name = ? and type = ?)',[name,type], (error, results) =>{
+                if(results.length > 0) {
                 setValue(results)
+                } else {
+                }
             })
 
             function setValue (value){
@@ -145,5 +148,5 @@ module.exports = {
         } else {
             res.redirect('/login');
         }
-    }
+    },
 }
