@@ -34,12 +34,6 @@ module.exports = {
         }
     } ,
 
-    getSuggestion : (req, res) => {
-        if(req.session.loggedin === true) {
-            res.render('sadmin')
-        }
-    },
-
     getLogs: (req, res) =>{
         if(req.session.loggedin === true) {
             wid = req.session.wID;
@@ -49,6 +43,17 @@ module.exports = {
                     results
                 })
             })
+        }
+    },
+
+    delLogs: (req, res) =>{
+        if(req.session.loggedin === true) {
+            wid = req.session.wID;
+            connection.query('delete from logs where manager_id in (select id from manager where warehhouse_id = ?)',[wid], (error, results)=>{
+                res.redirect('/logsadmin');
+            })
+        } else {
+            res.redirect('/login');
         }
     }
 }

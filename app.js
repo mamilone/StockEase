@@ -8,7 +8,7 @@ var path = require('path');
 var logger = require('morgan');
 const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
 const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail, ManRegCheck } = require('./routes/register');
-const { getAdminDetail, getManagerDetails, getSuggestion, getLogs } = require('./routes/admind');
+const { getAdminDetail, getManagerDetails, getLogs, delLogs } = require('./routes/admind');
 const { getManagerD, getshipment, getrestock, getProductDetails} = require('./routes/mdetails');
 const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
 const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
@@ -27,7 +27,7 @@ var connection = mysql.createConnection({
     user    : 'root',
     password: "",
     database: database_name,
-    port:3306
+    port: 4000
 });
 
 
@@ -73,10 +73,10 @@ app.get('/home', (req, res)=> {
 
 app.all('/login', getLoginPage);
 app.get('/mainadmin', getAdminDetail);
-app.get('/sadmin', getSuggestion);
 app.get('/madmin', getManagerDetails);
 app.get('/secadmin',getSectionDetails);
 app.get('/logsadmin',getLogs);
+app.get('/delLogs', delLogs);
 
 app.get('/mwarehouse',ViewStocks);
 app.get('/mproducts',getProductDetails);
