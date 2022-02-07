@@ -25,7 +25,7 @@ var connection = mysql.createConnection({
     user    : 'root',
     password: "",
     database: database_name,
-    port:4000
+    port:3306
 });
 
 
