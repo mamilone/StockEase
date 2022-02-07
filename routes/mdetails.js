@@ -1,5 +1,3 @@
-const session = require("express-session");
-
 module.exports = {
     getManagerD: (req, res)=> {
         var username = req.session.username;
@@ -27,7 +25,7 @@ module.exports = {
     getshipment: (req, res)=>{
         if(req.session.loggedin === true) {
             var mid = req.session.userID;
-            var ptype = [],cresult = [],count = 0;
+            var cresult = [],count = 0;
             connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (error, results, fields) =>{
                 // console.log(results)
                 presult = results;
@@ -42,11 +40,42 @@ module.exports = {
             })
         }
     },
+
+
     getrestock: (req,res)=>{
         if(req.session.loggedin === true) {
-            res.render('mrestock')
+            var mid = req.session.userID;
+            var name=[],type=[], num = 0, ttype = '';
+            connection.query('select name from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (err, results)=>{
+                name = results;
+                connection.query('select type from product group by type',[], (err, results)=>{
+                    type = results;
+                    res.render('mrestock',{
+                        name,type,num,ttype,
+                        stockMSG: ''
+                    })
+                })
+            })
         }
     },
+
+    getrestockSuccess: (req,res)=>{
+        if(req.session.loggedin === true) {
+            var mid = req.session.userID;
+            var name=[],type=[]
+            connection.query('select name from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (err, results)=>{
+                name = results;
+                connection.query('select type from product group by type',[], (err, results)=>{
+                    type = results;
+                    res.render('mrestock',{
+                        name,type,
+                        stockMSG: 'Items Added Succeessfully'
+                    })
+                })
+            })
+        }
+    },
+
     getProductDetails: (req, res)=> {
         if(req.session.loggedin === true) {
             id = req.session.userID;
@@ -55,7 +84,6 @@ module.exports = {
                 crlength = cresults.length;
                 connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[id],(error, results, fields) =>{
                     rlength = results.length
-                    // console.log(results.length)
                     res.render('mproducts',{
                         results,rlength,cresults,crlength
                     })

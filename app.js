@@ -1,5 +1,6 @@
 //including node_module packages in this file
 var mysql = require('mysql');
+var $ = require('jquery');
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -13,6 +14,7 @@ const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
 const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
 const { ManagerAdd, checkManagerDel } = require('./routes/AddDeleteManager');
 const { ViewStocks, CheckShipStocks, DelStocks, calculateLocation } = require('./routes/AddDeleteViewStocks');
+const { calAvailAdd, CheckAddStocks, checkEmptyCat, sucAdd, notypeFail } = require('./routes/StockCal');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
@@ -113,16 +115,12 @@ app.post('/checkAll',CheckShipStocks);
 app.post('/confirmShip',DelStocks);
 app.get('/calculateLocation',calculateLocation);
 
-
-
-
-
-
-
+app.post('/checkAdd',CheckAddStocks);
+app.get('/calAvailAdd',calAvailAdd);
+app.get('/checkEmptyCat',checkEmptyCat);
+app.get('/sucAdd',sucAdd);
+app.get('/notypeFail',notypeFail);
 
 module.exports = app;
-
-
-
 
 app.listen(port, ()=> console.log(`Listening on port ${port}`));
