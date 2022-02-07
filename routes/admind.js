@@ -38,5 +38,17 @@ module.exports = {
         if(req.session.loggedin === true) {
             res.render('sadmin')
         }
+    },
+
+    getLogs: (req, res) =>{
+        if(req.session.loggedin === true) {
+            wid = req.session.wID;
+            console.log(id,wid)
+            connection.query('select m.name as manager,p.name as product,l.laction,l.ldate from logs l,manager m,product p where l.pid = p.id and l.manager_id = m.id and manager_id IN (select id from manager where warehouse_id = ?)',[wid],(error,results)=>{
+                res.render('logsadmin',{
+                    results
+                })
+            })
+        }
     }
 }

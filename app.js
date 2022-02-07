@@ -8,7 +8,7 @@ var path = require('path');
 var logger = require('morgan');
 const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
 const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail, ManRegCheck } = require('./routes/register');
-const { getAdminDetail, getManagerDetails, getSuggestion } = require('./routes/admind');
+const { getAdminDetail, getManagerDetails, getSuggestion, getLogs } = require('./routes/admind');
 const { getManagerD, getshipment, getrestock, getProductDetails} = require('./routes/mdetails');
 const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
 const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
@@ -76,6 +76,7 @@ app.get('/mainadmin', getAdminDetail);
 app.get('/sadmin', getSuggestion);
 app.get('/madmin', getManagerDetails);
 app.get('/secadmin',getSectionDetails);
+app.get('/logsadmin',getLogs);
 
 app.get('/mwarehouse',ViewStocks);
 app.get('/mproducts',getProductDetails);
