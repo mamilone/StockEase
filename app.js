@@ -12,7 +12,7 @@ const { getManagerD, getshipment, getrestock, getProductDetails} = require('./ro
 const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
 const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
 const { ManagerAdd, checkManagerDel } = require('./routes/AddDeleteManager');
-const { ViewStocks, CheckShipStocks, DelStocks, calculateLocation, delStockSuccess, countStockFail, delmatchFail } = require('./routes/AddDeleteViewStocks');
+const { ViewStocks, CheckShipStocks, DelStocks, calculateLocation, delStockSuccess, countStockFail, delmatchFail, delEmpty } = require('./routes/AddDeleteViewStocks');
 const { calAvailAdd, CheckAddStocks, checkEmptyCat, sucAdd, notypeFail, addmatchFail } = require('./routes/StockCal');
 require('dotenv').config();
 const database_name = 'stock-ease';
@@ -116,7 +116,8 @@ app.post('/confirmShip',DelStocks);
 app.get('/calculateLocation',calculateLocation);
 app.get('/countStockFail',countStockFail);
 app.get('/delmatchFail',delmatchFail);
-app.get('/delStockSuccess',delStockSuccess)
+app.get('/delStockSuccess',delStockSuccess);
+app.get('/delEmpty',delEmpty);
 
 app.post('/checkAdd',CheckAddStocks);
 app.get('/calAvailAdd',calAvailAdd);

@@ -23,18 +23,22 @@ module.exports = {
                 var wid = req.session.wID;
                 cresult = value;
                 clength = cresult.length;
-                connection.query('select count(*) as count,cat_number as category_number,section_id from stores where cat_number in (select category_number from category where product_id = (select id from product where name = ? and type = ?) and section_id in (select id from section where warehouse_id = ?)) and section_id in (select section_id from category where product_id = (select id from product where name = ? and type = ?) and section_id in (select id from section where warehouse_id = ?)) group by category_number,section_id;',[name,type,wid,name,type,wid], (error, results) =>{
+                connection.query('select count(*) as count,cat_number as category_number,section_id from stores where cat_number in (select category_number from category where product_id = (select id from product where name = ? and type = ?) and section_id in (select id from section where warehouse_id = ?)) and section_id in (select section_id from category where product_id = (select id from product where name = ? and type = ?) and section_id in (select id from section where warehouse_id = ?)) group by category_number,section_id',[name,type,wid,name,type,wid], (error, results) =>{
                     console.log("result",results)
                     if(results.length > 0) {
-                        for( var i =0; i < cresult.length ; i ++) {
+                        for( var i =0; i < cresult.length ; i++) {
+                            for(var j = 0 ; j < results.length ; j++) {
                         // console.log("test",i,cresult[i].category_number,results,results[0].category_number);
-                            if((cresult[i].category_number === results[i].category_number) && (cresult[i].section_id === results[i].section_id)) {
-                                cresult[i]['count'] = results[i].count
+                                if((cresult[i].category_number === results[j].category_number) && (cresult[i].section_id === results[j].section_id)) {
+                                    cresult[i]['count'] = results[i].count
 
+                                }
                             }
                         }
                         console.log(cresult);
                         res.redirect('calculateLocation')
+                    } else {
+                        res.redirect('delEmpty')
                     }
                 })
             }
@@ -52,30 +56,32 @@ module.exports = {
                 console.log("Enter the quantity First !") 
             } else { 
                 for(var i = 0 ; i < cresult.length ; i++) {
-                    if(cresult[i].count == 0) { 
-                            continue;
-                    } else if(count <= cresult[i].count) {
-                        scount.push(count);
-                        category.push(cresult[i].category_number); 
-                        section_id.push(cresult[i].section_id);
-                        section_name.push(cresult[i].name) 
-                        console.log("elseif count",count); 
-                        console.log(count," items from category ",cresult[i].category_number," stored in section ",cresult[i].name);
-                        count = 0;
-                        break;
-                    } else if(count == 0) {
-                        break;
-                    } else {  
-                        if(count!= 0) { 
-                            scount.push(cresult[i].count); 
-                            category.push(cresult[i].category_number);
+                    if(cresult[i].count) {
+                        if(cresult[i].count == 0) { 
+                                continue;
+                        } else if(count <= cresult[i].count) {
+                            scount.push(count);
+                            category.push(cresult[i].category_number); 
                             section_id.push(cresult[i].section_id);
-                            section_name.push(cresult[i].name); 
-                            console.log("elsecount",cresult[i].count);
-                            console.log(cresult[i].count," items from category ",cresult[i].category_number," stored in section ",cresult[i].name)
-                            count = count - cresult[i].count 
-                            console.log(count);
-                        } 
+                            section_name.push(cresult[i].name) 
+                            console.log("elseif count",count); 
+                            console.log(count," items from category ",cresult[i].category_number," stored in section ",cresult[i].name);
+                            count = 0;
+                            break;
+                        } else if(count == 0) {
+                            break;
+                        } else {  
+                            if(count > 0) { 
+                                scount.push(cresult[i].count); 
+                                category.push(cresult[i].category_number);
+                                section_id.push(cresult[i].section_id);
+                                section_name.push(cresult[i].name); 
+                                console.log("elsecount",cresult[i].count);
+                                console.log(cresult[i].count," items from category ",cresult[i].category_number," stored in section ",cresult[i].name)
+                                count = count - cresult[i].count 
+                                console.log(count);
+                            } 
+                        }
                     } 
                 } 
             }
@@ -213,6 +219,26 @@ module.exports = {
                     res.render('mshipment',{
                         presult,tresult,cresult,count,
                         shipMSG : 'MatchFail'
+                    })
+                })
+            })
+        }
+    }, 
+
+    delEmpty: (req, res) =>{
+        if(req.session.loggedin === true) {
+            var mid = req.session.userID;
+            var cresult = [],count = 0;
+            connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (error, results, fields) =>{
+                // console.log(results)
+                presult = results;
+                connection.query('select type from product where warehouse_id = (select warehouse_id from manager where id = ?) group by type',[mid], (error, results, fields) =>{
+                    // console.log(results);
+                    tresult = results;
+                    ptype = results;
+                    res.render('mshipment',{
+                        presult,tresult,cresult,count,
+                        shipMSG : 'Empty'
                     })
                 })
             })

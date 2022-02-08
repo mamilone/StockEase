@@ -82,16 +82,23 @@
     <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span></span>SHIP</button>
    </div>
    <div class="status">
-       <% if(shipMSG != '') { %>
-        <% if(shipMSG == 'Success') { %>
-            <h5 class="text-center text-success">Items Shipped Successfully!</h5>
-        <% } else if (shipMSG == 'Failure') { %>
-            <h5 class="text-center text-danger">Enter a Correct Quantity!!</h5>
-        <% } else if(shipMSG == 'MatchFail') { %>
-            <h5 class="text-center text-danger">Enter proper Item Details!</h5>
+        <% if(shipMSG != '') { %>
+            <% if(shipMSG == 'Success') { %>
+                <h5 class="text-center text-success">Items Shipped Successfully!</h5>
+            <% } else if (shipMSG == 'Failure') { %>
+                <h5 class="text-center text-danger">Enter a Correct Quantity!!</h5>
+            <% } else if(shipMSG == 'MatchFail') { %>
+                <h5 class="text-center text-danger">Enter proper Item Details!</h5>
+            <% } else if(shipMSG == 'Empty') {%>
+                <h5 class="text-center text-danger">Sadly there are no items available for this product</h5>
+            <% } %>
         <% } %>
-       <% } %>
    </div>
+   <% if(shipMSG == 'Empty') { %>
+       <script type="text/javascript">
+           alert('No items Available');
+       </script>
+   <% } %>
 </form>
 </body>
 </html>
