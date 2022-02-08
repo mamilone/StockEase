@@ -1,6 +1,5 @@
 //including node_module packages in this file
 var mysql = require('mysql');
-var $ = require('jquery');
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -13,13 +12,13 @@ const { getManagerD, getshipment, getrestock, getProductDetails} = require('./ro
 const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
 const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
 const { ManagerAdd, checkManagerDel } = require('./routes/AddDeleteManager');
-const { ViewStocks, CheckShipStocks, DelStocks, calculateLocation } = require('./routes/AddDeleteViewStocks');
-const { calAvailAdd, CheckAddStocks, checkEmptyCat, sucAdd, notypeFail } = require('./routes/StockCal');
+const { ViewStocks, CheckShipStocks, DelStocks, calculateLocation, delStockSuccess, countStockFail, delmatchFail } = require('./routes/AddDeleteViewStocks');
+const { calAvailAdd, CheckAddStocks, checkEmptyCat, sucAdd, notypeFail, addmatchFail } = require('./routes/StockCal');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
 var app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 //connecting mysql database
 var connection = mysql.createConnection({
@@ -115,11 +114,15 @@ app.post('/delManager',checkManagerDel);
 app.post('/checkAll',CheckShipStocks);
 app.post('/confirmShip',DelStocks);
 app.get('/calculateLocation',calculateLocation);
+app.get('/countStockFail',countStockFail);
+app.get('/delmatchFail',delmatchFail);
+app.get('/delStockSuccess',delStockSuccess)
 
 app.post('/checkAdd',CheckAddStocks);
 app.get('/calAvailAdd',calAvailAdd);
 app.get('/checkEmptyCat',checkEmptyCat);
 app.get('/sucAdd',sucAdd);
+app.get('/addmatchFail',addmatchFail);
 app.get('/notypeFail',notypeFail);
 
 module.exports = app;

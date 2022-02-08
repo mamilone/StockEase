@@ -183,3 +183,9 @@ header {
     position: absolute;
     top: 500px;
 }
+
+.status {
+    margin-left: 300px;
+    position: absolute;
+    top: 550px;
+}
