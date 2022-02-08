@@ -81,42 +81,24 @@
     <div class="ship">
     <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><span></span>SHIP</button>
    </div>
-</form>
-    <%= console.log("results",cresult); %>
-    <% if(cresult.length > 0) { %>
-    <div class="modal"  tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-           <div class="modal-content">
-               <form action="addProduct" method="post">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Ship a Product</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <%if(count == 0) { %> 
-             <h5>Enter the quantity First !</h5> 
-            <% } else { %> 
-                <% for(var i = 0 ; i < cresult.length ; i++) { %>
-                    <%  if(cresult[i].count == 0) { %>
-                            <%continue;%>
-                        <%} else if(count <= cresult[i].count) {%>
-                            <h5><%=count%> items from category <%=cresult[i].category_number%> stored in section <%=cresult[i].name %></h5>
-                            <% break %>
-                        <% } else { %> 
-                            <% if(count!= 0) { %>
-                                <h5><%=cresult[i].count%>items from category <%=cresult[i].category_number%> stored in section <%= cresult[i].name %></h5>
-                            <% } %>
-                        <% } %>
-                <% } %>
+   <div class="status">
+        <% if(shipMSG != '') { %>
+            <% if(shipMSG == 'Success') { %>
+                <h5 class="text-center text-success">Items Shipped Successfully!</h5>
+            <% } else if (shipMSG == 'Failure') { %>
+                <h5 class="text-center text-danger">Enter a Correct Quantity!!</h5>
+            <% } else if(shipMSG == 'MatchFail') { %>
+                <h5 class="text-center text-danger">Enter proper Item Details!</h5>
+            <% } else if(shipMSG == 'Empty') {%>
+                <h5 class="text-center text-danger">Sadly there are no items available for this product</h5>
             <% } %>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-              <button type="submit" class="btn btn-primary">CONFIRM</button>
-            </div>
-            </form>
-            </div>
-        </div>
-        </div>
-    <% } %>
+        <% } %>
+   </div>
+   <% if(shipMSG == 'Empty') { %>
+       <script type="text/javascript">
+           alert('No items Available');
+       </script>
+   <% } %>
+</form>
 </body>
 </html>

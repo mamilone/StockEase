@@ -17,7 +17,9 @@
             <h5><%=scount[i]%> is present in category <%=category[i]%> which is in section <%=section_name[i]%></h5>
         <% } %>
     <% } %>
-            
+    <% if(count > 0) { %>
+        <h5><%=count%> number of items not available for this product</h5>
+    <% } %>        
         <button class="btn btn-primary" type="submit">Confirm</button>
     </form>
     <form action="mshipment" method="get">

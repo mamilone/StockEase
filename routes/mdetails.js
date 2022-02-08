@@ -29,12 +29,13 @@ module.exports = {
             connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (error, results, fields) =>{
                 // console.log(results)
                 presult = results;
-                connection.query('select type from product group by type',[], (error, results, fields) =>{
+                connection.query('select type from product where warehouse_id = (select warehouse_id from manager where id = ?) group by type',[mid], (error, results, fields) =>{
                     // console.log(results);
                     tresult = results;
                     ptype = results;
                     res.render('mshipment',{
-                        presult,tresult,cresult,count
+                        presult,tresult,cresult,count,
+                        shipMSG : ''
                     })
                 })
             })
@@ -48,7 +49,7 @@ module.exports = {
             var name=[],type=[], num = 0, ttype = '';
             connection.query('select name from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (err, results)=>{
                 name = results;
-                connection.query('select type from product group by type',[], (err, results)=>{
+                connection.query('select type from product where warehouse_id = (select warehouse_id from manager where id = ?) group by type',[mid], (err, results)=>{
                     type = results;
                     res.render('mrestock',{
                         name,type,num,ttype,
@@ -58,29 +59,11 @@ module.exports = {
             })
         }
     },
-
-    getrestockSuccess: (req,res)=>{
-        if(req.session.loggedin === true) {
-            var mid = req.session.userID;
-            var name=[],type=[]
-            connection.query('select name from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (err, results)=>{
-                name = results;
-                connection.query('select type from product group by type',[], (err, results)=>{
-                    type = results;
-                    res.render('mrestock',{
-                        name,type,
-                        stockMSG: 'Items Added Succeessfully'
-                    })
-                })
-            })
-        }
-    },
-
     getProductDetails: (req, res)=> {
         if(req.session.loggedin === true) {
             id = req.session.userID;
             console.log(req.session.userID);
-            connection.query('select type from product group by type',[], (error, cresults, fields) =>{
+            connection.query('select type from product where warehouse_id = (select warehouse_id from manager where id = ?) group by type',[id], (error, cresults, fields) =>{
                 crlength = cresults.length;
                 connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[id],(error, results, fields) =>{
                     rlength = results.length
@@ -92,3 +75,20 @@ module.exports = {
         }
     }
 }
+
+   // getrestockSuccess: (req,res)=>{
+    //     if(req.session.loggedin === true) {
+    //         var mid = req.session.userID;
+    //         var name=[],type=[]
+    //         connection.query('select name from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (err, results)=>{
+    //             name = results;
+    //             connection.query('select type from product group by type',[], (err, results)=>{
+    //                 type = results;
+    //                 res.render('mrestock',{
+    //                     name,type,
+    //                     stockMSG: 'Items Added Succeessfully'
+    //                 })
+    //             })
+    //         })
+    //     }
+    // },

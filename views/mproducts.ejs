@@ -95,14 +95,7 @@
               </div>
             <h5>Product Type</h5>
             <div class="input-group mb-3">
-                <select name="ptype" class="form-select" id="inputGroupSelect02">
-                  <option selected>Choose...</option>
-                  <% if(crlength > 0) { %>
-                    <% cresults.forEach((cresults, index) => { %>
-                  <option name="ptype" value="<%= cresults.type %>"><%=cresults.type%></option>
-                  <% }) %>
-                  <% } %>
-                </select>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="ptype" placeholder="e.g. electronics, etc.">
             </div>
         </div>
         <div class="modal-footer">
