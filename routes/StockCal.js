@@ -134,7 +134,7 @@ module.exports = {
                             connection.query('select * from category where product_id is null and section_id = (select id from section where product_type = ?)',[ttype],(error, results) =>{
                                 if(results.length > 0) {
                                 console.log('result',results);
-                                res.redirect('calAvailAdd')
+                                res.redirect('checkEmptyCat')
                                 } else {
                                     res.redirect('notypeFail');
                                 }

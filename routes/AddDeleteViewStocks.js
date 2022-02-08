@@ -245,8 +245,8 @@ module.exports = {
     },
 
     delUpdateCat: (req, res) =>{
-        mid = req.session.wID;
-        connection.query('select * from category where product_id = (select id from product where name = ? and type = ? ) and section_id in (select id from section where warehouse_id = ? ) and category_number not in (select cat_number from stores where cat_number in (select category_number from category where product_id = (select id from product where name = ? and type = ?)) and section_id in (select section_id from category where product_id = (select id from product where name = ? and type = ? ))group by cat_number,section_id)',[name,type,wid,name,type,name,type], (err, results)=>{
+        wid = req.session.wID;
+        connection.query('select * from category where product_id = (select id from product where name = ? and type = ? ) and section_id in (select id from section where warehouse_id = ? ) and category_number not in (select cat_number from stores where cat_number in (select category_number from category where product_id = (select id from product where name = ? and type = ?)) and section_id in (select section_id from category where product_id = (select id from product where name = ? and type = ? ) and section_id in (select id from section where warehouse_id = ?))group by cat_number,section_id);',[name,type,wid,name,type,name,type,wid], (err, results)=>{
             console.log("empty",results);
             if(results.length > 0) { 
                 for (var i = 0 ; i < results.length ; i++) {
