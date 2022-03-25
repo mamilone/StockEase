@@ -1,4 +1,4 @@
-const { CLIENT_SECURE_CONNECTION } = require("mysql/lib/protocol/constants/client");
+const { escapeRegExpChars } = require("ejs/lib/utils");
 
 module.exports = {
     getRegisterPage: (req, res)=> {
@@ -75,10 +75,12 @@ module.exports = {
                             connection.query('select id from warehouse where id = ?',[wid],(error,results)=>{
                                 console.log(results);
                                 if(results.length > 0) {
-                                    connection.query('insert into manager (name,username,email_id,password,warehouse_id) values (?,?,?,?,?)', [name,username,email,password,wid], (error, results, fields) =>{
-                                        if(error) throw error
+                                    connection.query('insert into manager_verify (name,username,email_id,password,warehouse_id) values (?,?,?,?,?)', [name,username,email,password,wid], (error, results, fields) =>{
+                                        if(error) {
+                                            res.redirect('alreadywait');
+                                        }
                                         else {
-                                            res.redirect('gettologin');
+                                            res.redirect('gettowait');
                                         }
                                     })
                                 } else {
@@ -115,6 +117,18 @@ module.exports = {
         res.render('register',{
             title:'register',
             registerMSG: 'Please Confirm your password'
+        })
+    }, 
+
+    getmanregsuccess : (req, res) =>{
+        res.render('waitmanverify',{
+            manMSG : 'Success'
+        })
+    }, 
+
+    alreadywait: (req, res) =>{
+        res.render('waitmanverify',{
+            manMSG : 'Exists'
         })
     }
 }

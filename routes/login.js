@@ -11,18 +11,28 @@ module.exports={
     manAuthCheck:(request, response) =>{
         var username = request.body.username;
         var password = request.body.password;
-            connection.query('select * from manager where username = ? and password = ?', [username, password], function(error, results, fields, rows) {
-                if(results.length > 0) {
-                    request.session.loggedin = true;
-                    request.session.username = username;
-                    request.session.userID = results[0].id;
-                    response.redirect('/mainmanager');
-                } else {
-                    request.session.loggedin = false;
-                    response.redirect('/manAuthFail');
-                }
-                response.end();
-            });
+        connection.query('select * from manager_verify where username = ? and password = ?',[username,password], (error, results) =>{
+            if(results.length > 0) {
+                response.render('waitmanverify',{
+                    manMSG : 'Wait'
+                })
+            } else {
+                connection.query('select * from manager where username = ? and password = ?', [username, password], (error, results) =>{
+                    if(results.length > 0) {
+                        request.session.loggedin = true;
+                        request.session.username = username;
+                        request.session.userID = results[0].id;
+                        request.session.role = 'Manager';
+                        console.log(request.session);
+                        response.redirect('/mainmanager');
+                    } else {
+                        request.session.loggedin = false;
+                        response.redirect('/manAuthFail');
+                    }
+                    response.end();
+                });
+            }
+        })
     },
 
     admAuthCheck:  (request,response)=> {

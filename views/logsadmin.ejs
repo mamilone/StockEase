@@ -10,68 +10,78 @@
     <title>Admin: Stock-Ease</title>
 </head>
 <body>
-    <header>
-        <h3 id="btnNav">
-            Stock-Ease
-        </h3>
-        <form action="logout" method="POST">
-            <button type="submit" class="btn btn-danger logout">Logout</button>
-        </form>
-    </header>
-    <nav class="navi">
-        <div class="navi__links">
-            <a href="logsadmin" class="navi__link navi__link--active">
-                <i class="material-icons">description</i>
-                Logs
-            </a>
-            <a  class="navi__link" href="secadmin">
-                <i class="material-icons">inventory</i>
-                Sections
-            </a>
-            <a href="madmin" class="navi__link">
-                <i class="material-icons">people</i>
-                Manager
-            </a>
-            <a href="mainadmin" class="navi__link">
-                <i class="material-icons">person</i>
-                Profile
-            </a>
-        </div>
-    </nav>
+    <div class="wrap">
+        <div class="bg"></div>
+        <div class="bg1"></div>
+        <div class="content">
+            <header>
+                <h3 id="btnNav">
+                    Stock-Ease
+                </h3>
+                <form action="logout" method="POST">
+                    <button type="submit" class="btn btn-danger logout">Logout</button>
+                </form>
+            </header>
+            <nav class="navi">
+                <div class="navi__links">
+                    <a href="logsadmin" class="navi__link navi__link--active">
+                        <i class="material-icons">description</i>
+                        Logs
+                    </a>
+                    <a  class="navi__link" href="secadmin">
+                        <i class="material-icons">inventory</i>
+                        Sections
+                    </a>
+                    <a href="madmin" class="navi__link">
+                        <i class="material-icons">people</i>
+                        Manager
+                    </a>
+                    <a href="mainadmin" class="navi__link">
+                        <i class="material-icons">person</i>
+                        Profile
+                    </a>
+                    <a href="verifymadmin" class="navi__link">
+                        <i class="material-icons">verified</i>
+                        Manager Authentication
+                    </a>
+                </div>
+            </nav>
 
-    <!-- Logs displayed here -->
-    <div class="productadmin">
-        <h2>Items Log</h2>
-        <form action="logdel" method="post">
-            <button type="submit" class="btn btn-danger logout">Clear Logs</button>
-        </form>
-        <table class="table table-light">
-            <thead>
-                <tr>
-                    <th>Sl No</th>
-                    <th>Product</th>
-                    <th>Manager</th>
-                    <th>Action</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if(results.length > 0) { %>
-                    <% results.forEach((results, index) => { %>
+            <!-- Logs displayed here -->
+            <div class="manageradmin">
+                <h2>Items Log</h2>
+                <form action="logdel" method="post">
+                    <button type="submit" class="btn btn-danger logout">Clear Logs</button>
+                </form>
+                <table class="table table-light">
+                    <thead>
                         <tr>
-                            <td><%= index+1 %></td>
-                            <td><%= results.product %></td>
-                            <td><%= results.manager %></td>
-                            <td><%= results.laction %></td>
-                            <td><%= results.ldate %></td>
+                            <th>Sl No</th>
+                            <th>Product</th>
+                            <th>Manager</th>
+                            <th>Action</th>
+                            <th>Date</th>
                         </tr>
-                    <% }) %>
-                <% } else { %>
-                    <td></td>
-                    <td>Logs Are Empty</td>
-                <% } %>
-            </tbody>
-        </table>
+                    </thead>
+                    <tbody>
+                        <% if(results.length > 0) { %>
+                            <% results.forEach((results, index) => { %>
+                                <tr>
+                                    <td><%= index+1 %></td>
+                                    <td><%= results.product %></td>
+                                    <td><%= results.manager %></td>
+                                    <td><%= results.laction %></td>
+                                    <td><%= results.ldate %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <td></td>
+                            <td>Logs Are Empty</td>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -21,7 +21,21 @@ header {
     z-index: 1;
 }
 
+.gif {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 60px;
+    left: 400px;
+}
 
+.gifship {
+    position: absolute;
+    z-index: -2;
+    top: 50px;
+    left: 800px;
+}
 
 .navi{
     position: fixed;
@@ -188,4 +202,9 @@ header {
     margin-left: 300px;
     position: absolute;
     top: 550px;
+}
+.status1 {
+    margin-left: 300px;
+    position: absolute;
+    top: 600px;
 }

@@ -49,11 +49,32 @@ module.exports = {
     delLogs: (req, res) =>{
         if(req.session.loggedin === true) {
             wid = req.session.wID;
-            connection.query('delete from logs where manager_id in (select id from manager where warehhouse_id = ?)',[wid], (error, results)=>{
+            connection.query('delete from logs where manager_id in (select id from manager where warehouse_id = ?)',[wid], (error, results)=>{
+                if(error) throw error;
+                else
                 res.redirect('/logsadmin');
             })
         } else {
             res.redirect('/login');
+        }
+    },
+
+    getvmdetail : (req, res) =>{
+        if(req.session.loggedin === true) {
+            var id = req.session.userID;
+            connection.query('select * from manager_verify where warehouse_id = (select id from warehouse where admin_id = ?)',[id], (error, results) =>{
+                if(results.length > 0) {
+                    res.render('verifymadmin',{
+                        results,
+                        verifyMSG : ''
+                    })
+                } else {
+                    res.render('verifymadmin',{
+                        results,
+                        verifyMSG : 'Empty'
+                    })
+                }
+            })
         }
     }
 }

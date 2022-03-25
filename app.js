@@ -3,17 +3,17 @@ var mysql = require('mysql');
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var path = require('path');
 var logger = require('morgan');
 const { manAuthCheck , admAuthCheck, getFaillogin, getLoginPage, getLogoutCheck}=require('./routes/login');
-const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail, ManRegCheck } = require('./routes/register');
-const { getAdminDetail, getManagerDetails, getLogs, delLogs } = require('./routes/admind');
+const { AdminCheck, getRegisterPage, getEmailFail, getUserFail, getPassFail, ManRegCheck, getmanregsuccess, alreadywait } = require('./routes/register');
+const { getAdminDetail, getManagerDetails, getLogs, delLogs, getvmdetail } = require('./routes/admind');
 const { getManagerD, getshipment, getrestock, getProductDetails} = require('./routes/mdetails');
-const { delProduct, AddProduct } = require('./routes/AddDeleteProduct');
+const { delProduct, AddProduct, errordelproduct } = require('./routes/AddDeleteProduct');
 const { getSectionDetails, addSection, delSection } = require('./routes/AddDeleteSection');
 const { ManagerAdd, checkManagerDel } = require('./routes/AddDeleteManager');
 const { ViewStocks, CheckShipStocks, DelStocks, calculateLocation, delStockSuccess, countStockFail, delmatchFail, delEmpty, delUpdateCat } = require('./routes/AddDeleteViewStocks');
 const { calAvailAdd, CheckAddStocks, checkEmptyCat, sucAdd, notypeFail, addmatchFail } = require('./routes/StockCal');
+const { verifym, remvman } = require('./routes/verifyman');
 require('dotenv').config();
 const database_name = 'stock-ease';
 
@@ -62,6 +62,7 @@ app.set('view engine', 'ejs')
 //app.use(expressValidator());
 
 
+//setting up all the backend routing
 app.get('', (req, res)=> {
     res.render('home');
 })
@@ -74,8 +75,13 @@ app.all('/login', getLoginPage);
 app.get('/mainadmin', getAdminDetail);
 app.get('/madmin', getManagerDetails);
 app.get('/secadmin',getSectionDetails);
+app.get('/verifymadmin',getvmdetail);
+
+app.post('/verifyman',verifym);
+app.post('/remvman',remvman);
+
 app.get('/logsadmin',getLogs);
-app.get('/delLogs', delLogs);
+app.post('/logdel', delLogs);
 
 app.get('/mwarehouse',ViewStocks);
 app.get('/mproducts',getProductDetails);
@@ -88,6 +94,8 @@ app.get('/adminemailFail',getEmailFail);
 app.get('/adminCheckFail',getUserFail);
 app.get('/adminpassFail', getPassFail);
 app.get('/gettoLogin',getLoginPage);
+app.get('/gettowait',getmanregsuccess);
+app.get('/alreadywait',alreadywait);
 
 //handling post request
 app.post('/authman', manAuthCheck);
@@ -107,6 +115,7 @@ app.post('/logout',getLogoutCheck);
 app.post('/addSection',addSection);
 app.post('/secDelete',delSection);
 app.post('/addProduct', AddProduct);
+app.get('/errordelproduct',errordelproduct);
 app.post('/addManager',ManagerAdd);
 app.post('/delManager',checkManagerDel);
 

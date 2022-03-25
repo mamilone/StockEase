@@ -11,6 +11,28 @@ body {
     background-color: #edeef6;
 }
 
+
+.bg {
+    position: fixed;
+    background-image: url(./adminwal.jpg);
+    opacity: 0.4;
+    left: 0;
+    z-index: -1;
+    top: 0;
+    width: 100%;
+    height:100%;
+}
+ .bg1 {
+    position: fixed;
+    background-image: url(./logo.png);
+    z-index: 0;
+    opacity: 0.5;
+    width: 33%;
+    height: 50%;
+    top: 160px;
+    left: 500px;
+ }
+
 header {
     text-align: center;
     color: #030f1b;
@@ -78,6 +100,7 @@ header {
     margin-left: 300px;
     position: absolute;
     top: 50px;
+    opacity: 0.8;
 }
 
 .adminprofile h1{
@@ -105,4 +128,14 @@ header {
     position: absolute;
     top:4px;
     right:4px
+}
+
+.status {
+    position: absolute;
+    top: 90px;
+    color: rgba(193, 78, 78, 0.748);
+}
+
+.manageradmin {
+    width: 70%;
 }

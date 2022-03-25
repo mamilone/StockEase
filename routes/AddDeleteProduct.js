@@ -24,9 +24,27 @@ module.exports = {
             var id = req.body.pid;
             connection.query('delete from product where id = ?',[id], (error, results, fields) =>{
                 if(error) {
-                    return res.status(500).send(error);
-                }
+                    res.redirect('/errordelproduct')
+                } else {
                 res.redirect('/mproducts');
+                }
+            })
+        }
+    },
+
+    errordelproduct: (req, res) =>{
+        if(req.session.loggedin === true) {
+            id = req.session.userID;
+            console.log(req.session.userID);
+            connection.query('select type from product where warehouse_id = (select warehouse_id from manager where id = ?) group by type',[id], (error, cresults, fields) =>{
+                crlength = cresults.length;
+                connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[id],(error, results, fields) =>{
+                    rlength = results.length
+                    res.render('mproducts',{
+                        results,rlength,cresults,crlength,
+                        prodMSG : 'Items related to this product are stored in the Warehouse. A product cannot be deleted unless there are no items available for this product'
+                    })
+                })
             })
         }
     }

@@ -71,11 +71,11 @@ module.exports = {
                             cat = vary[i].category_number;
                             sec = vary[i].section_id;
                             console.log(count,pid,cat,sec);
-                            (async function(cat,sec,count,pid){
+                            (function(cat,sec,count,pid){
                                 if(num > 0) {
                                     console.log("name",name,"type",ttype);
                                             while(num > 0 && count > 0) {
-                                                await connection.query('insert into items (product_id,manager_id) values (?,?)',[pid,mid],(err,res)=>{
+                                                connection.query('insert into items (product_id,manager_id) values (?,?)',[pid,mid],(err,res)=>{
                                                     if(err) throw err;
                                                     console.log(res.insertId);
                                                     item = res.insertId;
@@ -190,10 +190,11 @@ module.exports = {
     addmatchFail: (req, res) =>{
         if(req.session.loggedin === true) {
             var name=[],type=[]
+            wid = req.session.wID;
             connection.query('select name from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (err, results)=>{
                 name = results;
                 console.log("name",name)
-                connection.query('select type from product group by type',[], (err, result)=>{
+                connection.query('select type from product where warehouse_id = ? group by type',[wid], (err, result)=>{
                     type = result;
                     console.log("type",type)
                     res.render('mrestock',{

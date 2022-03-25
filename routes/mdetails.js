@@ -68,27 +68,11 @@ module.exports = {
                 connection.query('select * from product where warehouse_id = (select warehouse_id from manager where id = ?)',[id],(error, results, fields) =>{
                     rlength = results.length
                     res.render('mproducts',{
-                        results,rlength,cresults,crlength
+                        results,rlength,cresults,crlength,
+                        prodMSG : ''
                     })
                 })
             })
         }
     }
 }
-
-   // getrestockSuccess: (req,res)=>{
-    //     if(req.session.loggedin === true) {
-    //         var mid = req.session.userID;
-    //         var name=[],type=[]
-    //         connection.query('select name from product where warehouse_id = (select warehouse_id from manager where id = ?)',[mid], (err, results)=>{
-    //             name = results;
-    //             connection.query('select type from product group by type',[], (err, results)=>{
-    //                 type = results;
-    //                 res.render('mrestock',{
-    //                     name,type,
-    //                     stockMSG: 'Items Added Succeessfully'
-    //                 })
-    //             })
-    //         })
-    //     }
-    // },
