@@ -8,6 +8,7 @@ module.exports = {
         })
     },
 
+    //checking if admin username or email is duplicate
     AdminCheck:(request, response)=> {
         var username = request.body.Ausername;
         var password = request.body.Apassword;
@@ -53,6 +54,7 @@ module.exports = {
         })
     },
 
+    //to check manager's duplicate username or email 
     ManRegCheck : (req, res) =>{
         var name = req.body.mname;
         var username = req.body.muname;
@@ -99,6 +101,7 @@ module.exports = {
         })
     },
 
+    //if email register fail
     getEmailFail: (req, res) =>{
         res.render('register',{
             title:'register',
@@ -106,6 +109,7 @@ module.exports = {
         })
     },
 
+    //if username register fail
     getUserFail: (req, res) => {
         res.render('register',{
             title:'register',
@@ -113,6 +117,7 @@ module.exports = {
         })
     },
 
+    //if confirm password not entered
     getPassFail: (req, res)=>{
         res.render('register',{
             title:'register',
@@ -126,6 +131,8 @@ module.exports = {
         })
     }, 
 
+    //for manager(user) verification by admin.
+    //until admin verifies this manager he cannot login after register
     alreadywait: (req, res) =>{
         res.render('waitmanverify',{
             manMSG : 'Exists'

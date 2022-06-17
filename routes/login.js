@@ -1,4 +1,6 @@
 module.exports={
+    
+//renders login page
     getLoginPage: (req, res) => {
         req.session.loggedin = false;
         console.log(req.session);
@@ -7,7 +9,7 @@ module.exports={
         })
     },
 
-
+//manager(user) Authentication Check
     manAuthCheck:(request, response) =>{
         var username = request.body.username;
         var password = request.body.password;
@@ -35,6 +37,7 @@ module.exports={
         })
     },
 
+//admin authentication check
     admAuthCheck:  (request,response)=> {
         var username = request.body.username1;
         var password = request.body.password1;
@@ -57,12 +60,14 @@ module.exports={
         }
     },
 
+//function to execute if login failed
     getFaillogin: (req, res) => {
         res.render('login',{
             loginMSG: 'Incorrect Username and/or Password'
         });
     },
 
+//this function got called from other page routers to logout from the site and direct to login
     getLogoutCheck: (req,res)=>{
         if(req.session.loggedin === true) {
         req.session.loggedin = false;
@@ -71,3 +76,6 @@ module.exports={
         }
     }
 };
+
+/*i havent implimented proper security feature,
+ i.e. if i login as user and use a url related to admin, i can get access to admin pages but there wont be that much of an information displayed. */
